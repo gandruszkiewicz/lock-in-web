@@ -16,7 +16,6 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
-import { FullLayoutComponent } from './layouts/full-layout/full-layout.component';
 
 import { NgChartjsModule } from 'ng-chartjs';
 import { ThemeConstantService } from './shared/services/theme-constant.service';
@@ -26,8 +25,7 @@ registerLocaleData(en);
 @NgModule({
     declarations: [
         AppComponent,
-        CommonLayoutComponent,
-        FullLayoutComponent
+        CommonLayoutComponent
     ],
     imports: [
         BrowserModule,
