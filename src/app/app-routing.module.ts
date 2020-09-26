@@ -4,6 +4,7 @@ import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { CommonLayoutComponent } from "./layouts/common-layout/common-layout.component";
 import { CommonLayout_ROUTES } from "./shared/routes/common-layout.routes";
 import { Login3Component } from './authentication/login-3/login-3.component';
+import { SignUp3Component } from './authentication/sign-up-3/sign-up-3.component';
 
 const appRoutes: Routes = [
     { 
@@ -14,6 +15,10 @@ const appRoutes: Routes = [
     {
         path:'login',
         component: Login3Component
+    },
+    {
+        path:'signup',
+        component: SignUp3Component
     }
     
 ];

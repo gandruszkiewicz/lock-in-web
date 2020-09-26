@@ -19,6 +19,7 @@ import { CommonLayoutComponent } from './layouts/common-layout/common-layout.com
 
 import { NgChartjsModule } from 'ng-chartjs';
 import { ThemeConstantService } from './shared/services/theme-constant.service';
+import {AuthenticationModule} from './authentication/authentication.module';
 
 registerLocaleData(en);
 
@@ -36,7 +37,8 @@ registerLocaleData(en);
         SharedModule,
         NgChartjsModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AuthenticationModule
     ],
     providers: [
         { 
