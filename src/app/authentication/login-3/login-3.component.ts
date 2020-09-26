@@ -30,8 +30,6 @@ export class Login3Component {
           this.loginForm.controls[i].updateValueAndValidity();
         }
     
-        console.log(this.loginForm)
-    
         let reqParams : UserLoginRequest = {
           email : this.loginForm.value.userName,
           password : this.loginForm.value.password

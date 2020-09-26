@@ -1,5 +1,8 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { Router } from '@angular/router';
+import { UserRegisterRequest } from 'src/app/models/requests/user-register-request';
 
 
 @Component({
@@ -15,6 +18,18 @@ export class SignUp3Component {
             this.signUpForm.controls[ i ].markAsDirty();
             this.signUpForm.controls[ i ].updateValueAndValidity();
         }
+
+        const {value} = this.signUpForm;
+        let reqParams= new UserRegisterRequest(
+            value.email,
+            value.password
+        )
+        this.authService.register(reqParams).subscribe(response => {
+        if(response.token){
+            localStorage.setItem('token',response.token);
+            this.router.navigate(['/']);
+        }
+        })
     }
 
     updateConfirmValidator(): void {
@@ -29,12 +44,14 @@ export class SignUp3Component {
         }
     }
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder,
+                private authService: AuthService,
+                private router: Router) {
     }
 
     ngOnInit(): void {
         this.signUpForm = this.fb.group({
-            userName         : [ null, [ Validators.required ] ],
+            // userName         : [ null, [ Validators.required ] ],
             email            : [ null, [ Validators.required ] ],
             password         : [ null, [ Validators.required ] ],
             checkPassword    : [ null, [ Validators.required, this.confirmationValidator ] ],
