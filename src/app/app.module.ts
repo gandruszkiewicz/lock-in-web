@@ -20,13 +20,15 @@ import { CommonLayoutComponent } from './layouts/common-layout/common-layout.com
 import { NgChartjsModule } from 'ng-chartjs';
 import { ThemeConstantService } from './shared/services/theme-constant.service';
 import {AuthenticationModule} from './authentication/authentication.module';
+import { MyInformationsComponent } from './SecuredInformations/my-informations/my-informations.component';
 
 registerLocaleData(en);
 
 @NgModule({
     declarations: [
         AppComponent,
-        CommonLayoutComponent
+        CommonLayoutComponent,
+        MyInformationsComponent
     ],
     imports: [
         BrowserModule,
