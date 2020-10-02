@@ -5,8 +5,14 @@
         "I_HAVE_READ_THE":"I have read the",
         "AGREEMENT":"agreement"
     },
+    "FOOTER":{
+        "COPYRIGHT_TITLE": "Copyright © 2020 Pick Up My Data Sp. Z.O.O.. All rights reserved.",
+        "TERM_AND_CONDITIONS":"Term Conditions",
+        "PRIVACY_POLICY":"Privacy policy"
+    },
     "SIDE_MENU": {
-        "MY_INFORMATION" : "My Information"
+        "MY_INFORMATION" : "My Information",
+        "LOGOUT":"Logout"
     },
     "AUTHENTICATION":{
         "USERNAME":"Username",
@@ -20,7 +26,7 @@
         "SIGN_UP": "Signup",
         "SIGN_IN":"Sign In",
         "EMAIL":"Email",
-        "EMAIL_ALERT":"The input is not valid E-mail!",
+        "EMAIL_ALERT":"The input is not valid E-mail!"
         
     }
 }

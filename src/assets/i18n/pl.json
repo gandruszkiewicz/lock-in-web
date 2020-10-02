@@ -5,8 +5,14 @@
         "I_HAVE_READ_THE":"Zapoznałem się z",
         "AGREEMENT":"regulaminem"
     },
+    "FOOTER":{
+        "COPYRIGHT_TITLE": "Własność Pick Up My Data Sp. Z.O.O Wszelkie prawa zastrzeżone.",
+        "TERM_AND_CONDITIONS":"Zasady i warunki",
+        "PRIVACY_POLICY":"Polityka prywatności"
+    },
     "SIDE_MENU": {
-        "MY_INFORMATION" : "Moje informacje"
+        "MY_INFORMATION" : "Moje informacje",
+        "LOGOUT":"Wyloguj się"
     },
     "AUTHENTICATION":{
         "USERNAME":"Nazwa użytkownika",
