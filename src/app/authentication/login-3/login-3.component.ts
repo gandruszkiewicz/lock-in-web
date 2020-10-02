@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
 import {AuthService} from '../../services/auth-service/auth.service'
 import { Router } from '@angular/router';
 import { UserLoginRequest } from 'src/app/models/requests/user-login.request';
-
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     templateUrl: './login-3.component.html'
@@ -11,13 +11,22 @@ import { UserLoginRequest } from 'src/app/models/requests/user-login.request';
 
 export class Login3Component {
     loginForm: FormGroup;
+    AUTHENTICATION: any;
+    GENERAL: any
 
     constructor(private fb: FormBuilder,              
         private authService: AuthService,
-        private router: Router) {
+        private router: Router,
+        private translateService: TranslateService) {
     }
 
     ngOnInit(): void {
+      this.translateService.get("AUTHENTICATION").subscribe((translations) =>{
+        this.AUTHENTICATION = translations;
+      })
+      this.translateService.get("GENERAL").subscribe((translations)=>{
+        this.GENERAL = translations;
+      })
         this.loginForm = this.fb.group({
             userName: [ null, [ Validators.required ] ],
             password: [ null, [ Validators.required ] ]

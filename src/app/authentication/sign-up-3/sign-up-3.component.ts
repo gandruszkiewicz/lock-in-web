@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { Router } from '@angular/router';
 import { UserRegisterRequest } from 'src/app/models/requests/user-register-request';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { UserRegisterRequest } from 'src/app/models/requests/user-register-reque
 export class SignUp3Component {
 
     signUpForm: FormGroup;
+    AUTHENTICATION: any;
+    GENERAL: any;
 
     submitForm(): void {
         for (const i in this.signUpForm.controls) {
@@ -46,10 +49,17 @@ export class SignUp3Component {
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
-                private router: Router) {
+                private router: Router,
+                private translateService: TranslateService) {
     }
 
     ngOnInit(): void {
+        this.translateService.get("AUTHENTICATION").subscribe((translations) =>{
+            this.AUTHENTICATION = translations;
+          })
+          this.translateService.get("GENERAL").subscribe((translations)=>{
+            this.GENERAL = translations;
+          })
         this.signUpForm = this.fb.group({
             // userName         : [ null, [ Validators.required ] ],
             email            : [ null, [ Validators.required ] ],

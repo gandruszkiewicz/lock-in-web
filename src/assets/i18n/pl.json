@@ -1,5 +1,25 @@
 {
+    "GENERAL":{
+        "LEGAL": "Regulamin",
+        "PRIVACY": "Polityka prywatności",
+        "I_HAVE_READ_THE":"Zapoznałem się z",
+        "AGREEMENT":"regulaminem"
+    },
     "SIDE_MENU": {
         "MY_INFORMATION" : "Moje informacje"
+    },
+    "AUTHENTICATION":{
+        "USERNAME":"Nazwa użytkownika",
+        "USERNAME_ALERT":"Wprowadź nazwę użytkownika",
+        "USERNAME_PLACEHOLDER": "Nazwa użytkownika",
+        "PASSWORD": "Hasło",
+        "PASSWORD_ALERT":"Wprowadź hasło",
+        "FORGET_PASSWORD":"Zapomniałeś hasła?",
+        "CONFIRM_PASSWORD":"Potwierdź hasło",
+        "DONT_HAVE_ACCOUNT": "Nie posiadasz konta?",
+        "SIGN_UP": "Załóż konto",
+        "SIGN_IN":"Zaloguj się",
+        "EMAIL":"Adres e-mail",
+        "EMAIL_ALERT":"Podany adres e-mail jest nieprawidłowy"
     }
 }

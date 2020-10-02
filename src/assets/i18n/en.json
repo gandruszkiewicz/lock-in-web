@@ -1,5 +1,26 @@
 {
+    "GENERAL":{
+        "LEGAL": "Legal",
+        "PRIVACY": "Privacy",
+        "I_HAVE_READ_THE":"I have read the",
+        "AGREEMENT":"agreement"
+    },
     "SIDE_MENU": {
         "MY_INFORMATION" : "My Information"
+    },
+    "AUTHENTICATION":{
+        "USERNAME":"Username",
+        "USERNAME_ALERT":"Please input your username!",
+        "USERNAME_PLACEHOLDER": "Username",
+        "PASSWORD": "Password",
+        "PASSWORD_ALERT":"Please input your Password!",
+        "FORGET_PASSWORD":"Forget Password?",
+        "CONFIRM_PASSWORD":"Confirm Password",
+        "DONT_HAVE_ACCOUNT": "Don't have an account?",
+        "SIGN_UP": "Signup",
+        "SIGN_IN":"Sign In",
+        "EMAIL":"Email",
+        "EMAIL_ALERT":"The input is not valid E-mail!",
+        
     }
 }
