@@ -296,3 +296,10 @@
     position: fixed !important;
     bottom:0;
 }
+
+.router-outlet-content{
+    background: white;
+    padding: 2%;
+    height: 71vh;
+    border-radius: 1%;
+}

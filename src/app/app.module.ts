@@ -25,12 +25,31 @@ import { NgChartjsModule } from 'ng-chartjs';
 import { ThemeConstantService } from './shared/services/theme-constant.service';
 import {AuthenticationModule} from './authentication/authentication.module';
 import { MyInformationsComponent } from './SecuredInformations/my-informations/my-informations.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 registerLocaleData(en);
 
 export function HttpLoaderFactory(http: HttpClient){
     return new TranslateHttpLoader(http);
 }
+
+const antdModule= [
+    NzFormModule,
+    NzInputModule,
+    NzButtonModule,
+    NzCardModule,
+    NzCheckboxModule,
+    NzDatePickerModule,
+    NzToolTipModule,
+    NzGridModule
+]
 
 @NgModule({
     declarations: [
@@ -48,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient){
         NgChartjsModule,
         FormsModule,
         ReactiveFormsModule,
+        ...antdModule,
         AuthenticationModule,
         HttpClientModule,
         TranslateModule.forRoot({

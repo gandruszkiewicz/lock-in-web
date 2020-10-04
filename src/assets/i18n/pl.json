@@ -27,5 +27,18 @@
         "SIGN_IN":"Zaloguj się",
         "EMAIL":"Adres e-mail",
         "EMAIL_ALERT":"Podany adres e-mail jest nieprawidłowy"
+    },
+    "MY_INFORMATION":{
+        "NAME_ALERT":"Wprowadź nazwę wiadomości!",
+        "NAME_PLACEHOLDER":"Wpisz nazwę wiadomości",
+        "EMAIL_ALERT":"Niepoprawny adres e-mail",
+        "EMAIL_PLACEHOLDER":"Podaj adres e-mail, odbiorcy wiadomości",
+        "SEND_DATETIME_PLACEHOLDER": "Wybierz datę i godzinę wysłania wiadomości",
+        "SEND_DATETIME_TOOLTIP": "Wybierz datę i godzinę, kiedy wiadomość może zostać wysłana (do tego momentu możesz zawsze wyłączyć wiadomość).",
+        "INFORMATION_ALERT":"Wprowadź informacje, które chcesz zabezpieczyć",
+        "INFORMATION_PLACEHOLDER":"Podaj informacje, które chcesz przekazać osobie",
+        "SUBMIT_BTN":"Zabezpiecz",
+        "TURN_OFF_BTN": "Wyłącz"
+
     }
 }

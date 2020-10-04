@@ -28,5 +28,18 @@
         "EMAIL":"Email",
         "EMAIL_ALERT":"The input is not valid E-mail!"
         
+    },
+    "MY_INFORMATION":{
+        "NAME_ALERT":"Please input information message name!",
+        "NAME_PLACEHOLDER":"Input message name",
+        "EMAIL_ALERT":"E-mail addres is not valid",
+        "EMAIL_PLACEHOLDER":"Input e-mail addres of receiver",
+        "SEND_DATETIME_PLACEHOLDER": "Choose send date and time",
+        "SEND_DATETIME_TOOLTIP": "Choose date and time when your message schould be send to receiver (till that moment you can always turn off message)",
+        "INFORMATION_ALERT":"Please input information which you want to secure!",
+        "INFORMATION_PLACEHOLDER":"Please input information, which you want to send",
+        "SUBMIT_BTN":"Secure it",
+        "TURN_OFF_BTN": "Turn off"
+
     }
 }

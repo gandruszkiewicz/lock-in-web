@@ -1,0 +1,61 @@
+
+
+.login-form {
+  max-width: 450px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  /* width: 100%; */
+  float: right;
+}
+
+nz-date-picker,
+nz-month-picker,
+nz-range-picker,
+nz-week-picker {
+  margin: 0 8px 12px 0;
+}
+.myinformation-form__item-sendDateTime{
+  width: -webkit-fill-available;
+  margin:0;
+}
+.myinformation-form__control{
+  display: inline-flex;
+}
+.myinformation-form__control__tooltip{
+  margin-left: 2%;
+}
+
+.myinformation-form__form-item{
+  display: block;
+}
+
+::ng-deep .ant-form-item-control-input-content{
+  display: inline-flex;
+}
+
+::ng-deep .ant-form-item-label>label {
+  font-size: 12px;
+  display: initial;
+}
+
+::ng-deep nz-form-label > label{
+  white-space: normal;
+  text-align: left;
+  float: left;
+}
+::ng-deep .ant-form-item-label>label::after{
+  content: none;
+}
+/* nz-form-label{
+  white-space: normal;
+  float: left;
+} */
