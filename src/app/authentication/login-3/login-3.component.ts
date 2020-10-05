@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
-import {AuthService} from '../../services/auth-service/auth.service'
+import {AuthenticationService} from '../../shared/services/authentication.service'
 import { Router } from '@angular/router';
 import { UserLoginRequest } from 'src/app/models/requests/user-login.request';
 import {TranslateService} from '@ngx-translate/core';
@@ -15,7 +15,7 @@ export class Login3Component {
     GENERAL: any
 
     constructor(private fb: FormBuilder,              
-        private authService: AuthService,
+        private authService: AuthenticationService,
         private router: Router,
         private translateService: TranslateService) {
     }
@@ -43,7 +43,7 @@ export class Login3Component {
           email : this.loginForm.value.userName,
           password : this.loginForm.value.password
         }
-        this.authService.login(reqParams).subscribe(response => {
+        this.authService.login(reqParams.email, reqParams.password).subscribe(response => {
           if(response.token){
             localStorage.setItem('token',response.token);
             localStorage.setItem('userId', response.userId);

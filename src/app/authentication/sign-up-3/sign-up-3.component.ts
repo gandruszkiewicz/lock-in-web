@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { Router } from '@angular/router';
 import { UserRegisterRequest } from 'src/app/models/requests/user-register-request';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class SignUp3Component {
     }
 
     constructor(private fb: FormBuilder,
-                private authService: AuthService,
+                private authService: AuthenticationService,
                 private router: Router,
                 private translateService: TranslateService) {
     }

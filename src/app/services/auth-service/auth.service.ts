@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserLoginRequest } from '../../models/requests/user-login.request';
 import { UserLoginResponse } from '../../models/responses/user-login.response';
-import {ConstantsService} from '../constants.service';
+import {ConstantsService} from '../../shared/services/constants/constants.service';
 import { Observable } from 'rxjs';
 import {UserRegisterRequest} from '../../models/requests/user-register-request';
 import {UserRegisterResponse} from '../../models/responses/user-register.response';
