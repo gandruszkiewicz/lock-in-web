@@ -24,7 +24,7 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { NgChartjsModule } from 'ng-chartjs';
 import { ThemeConstantService } from './shared/services/theme-constant.service';
 import {AuthenticationModule} from './authentication/authentication.module';
-import { MyInformationsComponent } from './SecuredInformations/my-informations/my-informations.component';
+import { MyInformationsComponent } from './my-informations/my-informations.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';

@@ -1,5 +1,5 @@
 import { Routes, ROUTES } from '@angular/router';
-import { MyInformationsComponent } from 'src/app/SecuredInformations/my-informations/my-informations.component';
+import { MyInformationsComponent } from 'src/app/my-informations/my-informations.component';
 
 export const CommonLayout_ROUTES: Routes = [
     {
