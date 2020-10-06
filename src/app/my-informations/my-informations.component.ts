@@ -1,6 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import {SecuredInformationPostRequest} from '../shared/interfaces/requests/secured-information-post.request';
+import {SecuredInformationService} from '../shared/services/secured-information/secured-information.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-my-informations',
@@ -13,10 +16,13 @@ export class MyInformationsComponent implements OnInit {
   textValue: string;
   isDisabled: boolean = true;
   MY_INFORMATION: any;
+  userId: string;
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+    private securedInfoService: SecuredInformationService,
+    private authenticationSerivce: AuthenticationService) {
       this.securedInfoForm = this.fb.group({
         name: [null, [Validators.required]],
         information: [null, [Validators.required]],
@@ -30,13 +36,28 @@ export class MyInformationsComponent implements OnInit {
       this.securedInfoForm.controls[i].markAsDirty();
       this.securedInfoForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.securedInfoForm.value)
+    const {value} = this.securedInfoForm;
+    let postReq: SecuredInformationPostRequest = {
+      Information: value.information,
+      Name : value.name,
+      SendEmail: value.sendEmail,
+      SendDateTime : value.sendDateTime,
+      UserId: this.userId,
+      IsBlocked: false
+    }
+    this.securedInfoService.post(postReq).subscribe(response =>{
+      console.log(response);
+    });
+    
   }
 
-    ngOnInit(): void {
-      this.translateService.get("MY_INFORMATION").subscribe((translations) =>{
-        this.MY_INFORMATION = translations;
-      })
+  ngOnInit(): void {
+    this.authenticationSerivce.currentUser.subscribe(user =>{
+      this.userId = user.userId;
+    })
+    this.translateService.get("MY_INFORMATION").subscribe((translations) =>{
+      this.MY_INFORMATION = translations;
+    })
   }
 
   sendDateClick(){

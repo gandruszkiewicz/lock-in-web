@@ -45,8 +45,6 @@ export class Login3Component {
         }
         this.authService.login(reqParams.email, reqParams.password).subscribe(response => {
           if(response.token){
-            localStorage.setItem('token',response.token);
-            localStorage.setItem('userId', response.userId);
             this.router.navigate(['/']);
           }
         })

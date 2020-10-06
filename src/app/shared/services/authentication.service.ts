@@ -13,8 +13,9 @@ import { UserRegisterResponse } from 'src/app/models/responses/user-register.res
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-
+    private serviceBaseUrl;
     constructor(private http: HttpClient, private constants: ConstantsService) {
+        this.serviceBaseUrl = `${constants.apiBaseUrl}/identity`
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -23,11 +24,11 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(this.constants.apiBaseUrl, { username, password })
+    login(email: string, password: string) {
+        return this.http.post<any>(this.serviceBaseUrl+'/login', { email, password })
         .pipe(map(user => {
             if (user && user.token) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                //localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
             }
             return user;
@@ -35,7 +36,7 @@ export class AuthenticationService {
     }
 
     public register(reqParams: UserRegisterRequest): Observable<UserRegisterResponse>{
-        return this.http.post<UserRegisterResponse>(this.constants.apiBaseUrl+'identity/register',reqParams)
+        return this.http.post<UserRegisterResponse>(this.serviceBaseUrl+'/register',reqParams)
     }
 
     logout() {

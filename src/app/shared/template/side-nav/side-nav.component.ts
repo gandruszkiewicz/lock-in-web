@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { ROUTES } from './side-nav-routes.config';
 import { ThemeConstantService } from '../../services/theme-constant.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SideNavInterface } from '../../interfaces/side-nav.type';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'app-sidenav',
     templateUrl: './side-nav.component.html'
 })
 
-export class SideNavComponent{
+export class SideNavComponent implements OnInit{
 
     public menuItems: SideNavInterface[]
     isFolded : boolean;
@@ -22,6 +23,7 @@ export class SideNavComponent{
     constructor( 
         private themeService: ThemeConstantService,
         private translateService: TranslateService,
+        private authService: AuthenticationService,
         private router: Router) {}
 
     ngOnInit(): void {
@@ -40,8 +42,14 @@ export class SideNavComponent{
         this.themeService.isMenuFoldedChanges.subscribe(isFolded => this.isFolded = isFolded);
         this.themeService.isExpandChanges.subscribe(isExpand => this.isExpand = isExpand);
         this.themeService.isSideNavDarkChanges.subscribe(isDark => this.isSideNavDark = isDark);
-    }
 
+        this.authService.currentUser.subscribe(user =>{
+            if(!user?.token){
+                this.router.navigate(['/login']);
+            }
+        })
+    }
+    
     logoutClick(): void{
         localStorage.clear();
         this.router.navigate(['/login'])
