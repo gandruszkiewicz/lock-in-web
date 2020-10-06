@@ -46,9 +46,26 @@ export class MyInformationsComponent implements OnInit {
       IsBlocked: false
     }
     this.securedInfoService.post(postReq).subscribe(response =>{
-      console.log(response);
+
+    },null, () =>{
+      this.securedInfoForm = this.fb.group({
+        name: [this.changeFormValueToStars(value.name), [Validators.required]],
+        information: [this.changeFormValueToStars(value.information), [Validators.required]],
+        sendEmail: [this.changeFormValueToStars(value.sendEmail), [Validators.required, Validators.email]],
+        sendDateTime: [null,[Validators.required]]
+      })
+      this.isDisabled = false;
     });
-    
+  }
+
+
+  changeFormValueToStars(value: string): string{
+    let starValue: string ='';
+
+    for(let index = 0; index <= value?.length; index++){
+      starValue += '*';
+    }
+    return starValue;
   }
 
   ngOnInit(): void {
