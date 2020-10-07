@@ -33,6 +33,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { SecuredInformationService } from './shared/services/secured-information/secured-information.service';
 
 registerLocaleData(en);
 
@@ -87,7 +88,8 @@ const antdModule= [
             provide: LocationStrategy, 
             useClass: PathLocationStrategy
         },
-        ThemeConstantService
+        ThemeConstantService,
+        SecuredInformationService
     ],
     bootstrap: [AppComponent]
 })

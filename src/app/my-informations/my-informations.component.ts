@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {SecuredInformationPostRequest} from '../shared/interfaces/requests/secured-information-post.request';
 import {SecuredInformationService} from '../shared/services/secured-information/secured-information.service';
 import { AuthenticationService } from '../shared/services/authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-my-informations',
@@ -17,12 +18,15 @@ export class MyInformationsComponent implements OnInit {
   isDisabled: boolean = true;
   MY_INFORMATION: any;
   userId: string;
+  isEditForm: boolean;
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private translateService: TranslateService,
     private securedInfoService: SecuredInformationService,
-    private authenticationSerivce: AuthenticationService) {
+    private authenticationSerivce: AuthenticationService,
+    private router: ActivatedRoute) {
+      this.isEditForm =  window.location.href.includes('edit')
       this.securedInfoForm = this.fb.group({
         name: [null, [Validators.required]],
         information: [null, [Validators.required]],
@@ -69,6 +73,16 @@ export class MyInformationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.isEditForm){
+      this.securedInfoService.selectedSecuredInfo.subscribe(securedInfo =>{
+        this.securedInfoForm = this.fb.group({
+          name: [securedInfo.name, [Validators.required]],
+          information: [securedInfo.information, [Validators.required]],
+          sendEmail: [securedInfo.sendEmail, [Validators.required, Validators.email]],
+          sendDateTime: [securedInfo.sendDateTime,[Validators.required]]
+        });
+      })
+    }
     this.authenticationSerivce.currentUser.subscribe(user =>{
       this.userId = user.userId;
     })

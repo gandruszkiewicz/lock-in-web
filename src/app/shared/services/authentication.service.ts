@@ -16,7 +16,7 @@ export class AuthenticationService {
     private serviceBaseUrl;
     constructor(private http: HttpClient, private constants: ConstantsService) {
         this.serviceBaseUrl = `${constants.apiBaseUrl}/identity`
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<User>(null);
         this.currentUser = this.currentUserSubject.asObservable();
     }
 

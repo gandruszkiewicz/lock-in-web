@@ -17,7 +17,15 @@ function CommonLayout_ROUTES_Children(): Routes {
                 title: 'Moje Informacje',
                 headerDisplay: "none"
             }
-        }
+        },
+        {
+            path:'secured-info/edit',
+            component: MyInformationsComponent,
+            data:{
+                title: 'Moje Informacje',
+                headerDisplay: 'none'
+            }
+        },
     ];
 }
 

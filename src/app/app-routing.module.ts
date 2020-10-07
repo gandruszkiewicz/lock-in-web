@@ -5,6 +5,7 @@ import { CommonLayoutComponent } from "./layouts/common-layout/common-layout.com
 import { CommonLayout_ROUTES } from "./shared/routes/common-layout.routes";
 import { Login3Component } from './authentication/login-3/login-3.component';
 import { SignUp3Component } from './authentication/sign-up-3/sign-up-3.component';
+import { MyInformationsComponent } from './my-informations/my-informations.component';
 
 const appRoutes: Routes = [
     { 
