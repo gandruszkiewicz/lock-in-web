@@ -59,22 +59,7 @@
                     </ul>
                 </li>
             </ul>
+
         </li>
     </ul>
-    <ul class="ant-menu ant-menu-root ant-menu-inline side-nav-menu" 
-    [ngClass]="{
-        'ant-menu-inline-collapsed': isFolded,
-        'ant-menu-dark' : isSideNavDark
-    }"
->
-    <li class="ant-menu-item logout_btn" (click)="logoutClick()">
-        <a href="javascript:void(0);" class="ant-menu-submenu-title">
-            <span>{{SIDE_MENU?.LOGOUT}}</span>
-            <i class="ant-menu-submenu-arrow"></i>
-        </a>
-        <a [routerLink]="" (click)="closeMobileMenu()">
-            <span>{{SIDE_MENU?.LOGOUT}}</span>
-        </a>    
-    </li>
-</ul>
-</perfect-scrollbar>    
+</perfect-scrollbar>

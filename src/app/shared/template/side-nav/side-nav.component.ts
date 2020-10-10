@@ -89,11 +89,6 @@ export class SideNavComponent implements OnInit{
        }
     }
     
-    logoutClick(): void{
-        localStorage.clear();
-        this.router.navigate(['/login'])
-
-    }
 
     closeMobileMenu(): void {
         if (window.innerWidth < 992) {

@@ -5,14 +5,17 @@
         "I_HAVE_READ_THE":"I have read the",
         "AGREEMENT":"agreement"
     },
+    "QUICK_VIEW":{
+        "TITLE":"User profile",
+        "LOGOUT":"Logout"
+    },
     "FOOTER":{
         "COPYRIGHT_TITLE": "Copyright © 2020 Pick Up My Data Sp. Z.O.O.. All rights reserved.",
         "TERM_AND_CONDITIONS":"Term Conditions",
         "PRIVACY_POLICY":"Privacy policy"
     },
     "SIDE_MENU": {
-        "MY_INFORMATION" : "My Information",
-        "LOGOUT":"Logout"
+        "MY_INFORMATION" : "My Information"
     },
     "AUTHENTICATION":{
         "USERNAME":"Username",

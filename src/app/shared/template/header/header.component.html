@@ -27,9 +27,9 @@
         <ul class="nav-right">
             <li>
                 <a (click)="quickViewToggle()">
-                    <i nz-icon nzType="appstore" theme="outline"></i>
+                    <i nz-icon nzType="profile" theme="outline"></i>
                 </a>
-                <nz-drawer [nzWidth]="280" nzTitle="Quick View" [nzClosable]="false" [nzVisible]="quickViewVisible" nzPlacement="right" (nzOnClose)="quickViewToggle()">
+                <nz-drawer [nzWidth]="280" nzTitle="{{QUICK_VIEW?.TITLE}}" [nzClosable]="false" [nzVisible]="quickViewVisible" nzPlacement="right" (nzOnClose)="quickViewToggle()">
                     <app-quick-view></app-quick-view>
                 </nz-drawer>
             </li>
