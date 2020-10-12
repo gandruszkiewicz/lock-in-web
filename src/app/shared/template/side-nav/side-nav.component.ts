@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ChangeDetectorRef, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 import { ROUTES } from './side-nav-routes.config';
 import { ThemeConstantService } from '../../services/theme-constant.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,6 +23,7 @@ export class SideNavComponent implements OnInit{
     SIDE_MENU: any;
     my_information_menu_title: string;
     securedInfos: SecuredInformationResponse[];
+    UserId: string;
 
     constructor( 
         private themeService: ThemeConstantService,
@@ -33,18 +34,55 @@ export class SideNavComponent implements OnInit{
         private cdr: ChangeDetectorRef) {}
 
     async ngOnInit(): Promise<void> {
-        let userId: string = '';
-        let securedInfoMenuItems: SideNavInterface[] = 
-        new Array<SideNavInterface>();
 
        await this.authService.currentUser.subscribe(user =>{
             if(!user?.token){
                 this.router.navigate(['/login']);
             }else{
-                userId = user.userId;
+                this.UserId = user.userId;
+                this.processSideMenuContent();
             }
         })
-        await this.securedInfoService.getByUser(userId).subscribe(response =>{
+
+        let securedInfoMenuItems: SideNavInterface[] = 
+        new Array<SideNavInterface>();
+        this.securedInfoService.securedInfos.subscribe(response =>{
+            this.securedInfos = response;
+            response?.forEach(item =>{
+                securedInfoMenuItems.push({
+                    title : item.name,
+                    iconType: 'nzIcon',
+                    iconTheme: 'outline',
+                    icon : 'lock',
+                    submenu: [],
+                    path: `secured-info/edit`,
+                    isSecuredInfo: true,
+                    isTouched: false,
+                    id: item.id
+                })
+            })
+        },null,() =>{
+            this.menuItems = ROUTES.filter(menuItem => menuItem);
+            this.translateService.get('SIDE_MENU')
+            .subscribe((translations)=> {
+                this.SIDE_MENU = translations
+                this.my_information_menu_title = this.SIDE_MENU.MY_INFORMATION;
+                this.menuItems.forEach(x =>{
+                    if(x.title === SideMenuTitles.MyInformation){
+                        x.title = this.my_information_menu_title;
+                        x.submenu = securedInfoMenuItems;
+    
+                    }
+                });
+            })
+        })
+        
+    }
+
+    async processSideMenuContent(){
+        let securedInfoMenuItems: SideNavInterface[] = 
+        new Array<SideNavInterface>();
+        await this.securedInfoService.getByUser(this.UserId).subscribe(response =>{
             this.securedInfos = response;
             response.forEach(item =>{
                 securedInfoMenuItems.push({

@@ -9,6 +9,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ThemeConstantService } from './services/theme-constant.service';
 import { SearchPipe } from './pipes/search.pipe';
 import { AuthenticationService } from './services/authentication.service';
+import { SecuredInformationService } from './services/secured-information/secured-information.service';
 
 @NgModule({
     exports: [
@@ -32,7 +33,9 @@ import { AuthenticationService } from './services/authentication.service';
     ],
     providers: [
         ThemeConstantService,
-        AuthenticationService
+        AuthenticationService,
+        SecuredInformationService
+
     ]
 })
 

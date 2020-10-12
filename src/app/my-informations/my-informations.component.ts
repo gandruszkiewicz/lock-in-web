@@ -59,6 +59,9 @@ export class MyInformationsComponent implements OnInit {
         sendDateTime: [null,[Validators.required]]
       })
       this.isDisabled = false;
+      this.securedInfoService.getByUser(this.userId).subscribe(response =>{
+        this.securedInfoService.passNextData(response)
+      })
     });
   }
 

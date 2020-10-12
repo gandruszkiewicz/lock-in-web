@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import {SecuredInformationPostRequest} from '../../interfaces/requests/secured-information-post.request'
 import {SecuredInformationResponse} from '../../interfaces/responses/secured-information-response.type'
 import { map } from 'rxjs/operators';
+import { AuthenticationService } from '../authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class SecuredInformationService {
   private selectedSecuredInfoSubject: BehaviorSubject<SecuredInformationResponse>;
   public selectedSecuredInfo: Observable<SecuredInformationResponse>;
 
-  constructor(private http: HttpClient, private constants: ConstantsService) {
+  constructor(private http: HttpClient, private constants: ConstantsService, private authService: AuthenticationService) {
     this.serviceBaseUrl = `${constants.apiBaseUrl}/SecuredInformation`;
     
     this.securedInfosSubject = new BehaviorSubject<SecuredInformationResponse[]>(null);
@@ -25,10 +26,20 @@ export class SecuredInformationService {
 
     this.selectedSecuredInfoSubject = new BehaviorSubject<SecuredInformationResponse>(null);
     this.selectedSecuredInfo = this.selectedSecuredInfoSubject.asObservable();
+    this.authService.currentUser.subscribe(user => {
+      this.getByUser(user.userId).subscribe(data =>{
+        this.securedInfosSubject.next(data);
+      })
+    })
    }
 
   public passSelectedSecuredInfo(securedInfo: SecuredInformationResponse){
     this.selectedSecuredInfoSubject.next(securedInfo);
+  }
+
+  public passNextData(securedInfo: SecuredInformationResponse[]){
+    this.securedInfosSubject.next(securedInfo);
+    this.securedInfosSubject.complete();
   }
 
   public post(securedInformation: SecuredInformationPostRequest): Observable<any>{
