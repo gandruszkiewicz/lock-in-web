@@ -4,6 +4,9 @@ import { Observable } from "rxjs";
 import { distinctUntilChanged, filter, map, startWith } from "rxjs/operators";
 import { IBreadcrumb } from "../../shared/interfaces/breadcrumb.type";
 import { ThemeConstantService } from '../../shared/services/theme-constant.service';
+import { SecuredInformationService } from 'src/app/shared/services/secured-information/secured-information.service';
+import { SecuredInformationResponse } from 'src/app/shared/interfaces/responses/secured-information-response.type';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
     selector: 'app-common-layout',
@@ -18,8 +21,12 @@ export class CommonLayoutComponent  {
     isSideNavDark : boolean;
     isExpand: boolean;
     selectedHeaderColor: string;
+    securedInfos: SecuredInformationResponse[]
 
-    constructor(private router: Router,  private activatedRoute: ActivatedRoute, private themeService: ThemeConstantService) {
+    constructor(private router: Router,  private activatedRoute: ActivatedRoute,
+        private themeService: ThemeConstantService, 
+        private securedInfoService: SecuredInformationService,
+        private authService: AuthenticationService) {
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd),
             map(() => {
@@ -38,6 +45,12 @@ export class CommonLayoutComponent  {
         ).subscribe( (data: any) => {
             this.contentHeaderDisplay = data;
         });
+        if(!this.authService.currentUserValue){
+            this.router.navigate(['login'])
+        }
+        this.securedInfoService.getByUser(this.authService.currentUserValue.userId).subscribe(response =>{
+            this.securedInfos = response;
+        })
     }
 
     ngOnInit() {
@@ -75,5 +88,12 @@ export class CommonLayoutComponent  {
             return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
         }
         return newBreadcrumbs;
+    }
+    onSecuredInfoChanged(event: any){
+        let userId = this.authService.currentUserValue.userId
+        let securedInfoSub =this.securedInfoService.getByUser(userId).subscribe(response =>{
+            this.securedInfos = response
+            securedInfoSub.unsubscribe();
+        })
     }
 }

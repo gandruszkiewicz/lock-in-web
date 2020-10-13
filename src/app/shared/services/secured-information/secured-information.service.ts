@@ -27,9 +27,11 @@ export class SecuredInformationService {
     this.selectedSecuredInfoSubject = new BehaviorSubject<SecuredInformationResponse>(null);
     this.selectedSecuredInfo = this.selectedSecuredInfoSubject.asObservable();
     this.authService.currentUser.subscribe(user => {
-      this.getByUser(user.userId).subscribe(data =>{
-        this.securedInfosSubject.next(data);
-      })
+      if(user){
+        this.getByUser(user.userId).subscribe(data =>{
+          this.securedInfosSubject.next(data);
+        })
+      }
     })
    }
 
@@ -44,6 +46,14 @@ export class SecuredInformationService {
 
   public post(securedInformation: SecuredInformationPostRequest): Observable<any>{
     return this.http.post(this.serviceBaseUrl,securedInformation);
+  }
+
+  public delete(securedInfoId: number): any{
+    
+    this.http.delete(`${this.serviceBaseUrl}/${securedInfoId}`).subscribe(response =>{
+      let reduceCollection = this.securedInfosSubject.value.filter(item => item.id !== securedInfoId);
+      this.securedInfosSubject = new BehaviorSubject<SecuredInformationResponse[]>(reduceCollection);
+    });
   }
 
   public getByUser(userId): Observable<SecuredInformationResponse[]>{

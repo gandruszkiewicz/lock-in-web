@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ChangeDetectorRef, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ChangeDetectorRef, ChangeDetectionStrategy, AfterViewInit, Input } from '@angular/core';
 import { ROUTES } from './side-nav-routes.config';
 import { ThemeConstantService } from '../../services/theme-constant.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,6 +22,7 @@ export class SideNavComponent implements OnInit{
     isExpand : boolean;
     SIDE_MENU: any;
     my_information_menu_title: string;
+    @Input()
     securedInfos: SecuredInformationResponse[];
     UserId: string;
 
@@ -46,37 +47,32 @@ export class SideNavComponent implements OnInit{
 
         let securedInfoMenuItems: SideNavInterface[] = 
         new Array<SideNavInterface>();
-        this.securedInfoService.securedInfos.subscribe(response =>{
-            this.securedInfos = response;
-            response?.forEach(item =>{
-                securedInfoMenuItems.push({
-                    title : item.name,
-                    iconType: 'nzIcon',
-                    iconTheme: 'outline',
-                    icon : 'lock',
-                    submenu: [],
-                    path: `secured-info/edit`,
-                    isSecuredInfo: true,
-                    isTouched: false,
-                    id: item.id
-                })
+        this.securedInfos.forEach(item =>{
+            securedInfoMenuItems.push({
+                title : item.name,
+                iconType: 'nzIcon',
+                iconTheme: 'outline',
+                icon : 'lock',
+                submenu: [],
+                path: `secured-info/edit`,
+                isSecuredInfo: true,
+                isTouched: false,
+                id: item.id
             })
-        },null,() =>{
-            this.menuItems = ROUTES.filter(menuItem => menuItem);
-            this.translateService.get('SIDE_MENU')
-            .subscribe((translations)=> {
-                this.SIDE_MENU = translations
-                this.my_information_menu_title = this.SIDE_MENU.MY_INFORMATION;
-                this.menuItems.forEach(x =>{
-                    if(x.title === SideMenuTitles.MyInformation){
-                        x.title = this.my_information_menu_title;
-                        x.submenu = securedInfoMenuItems;
-    
-                    }
-                });
-            })
+        });
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.translateService.get('SIDE_MENU')
+        .subscribe((translations)=> {
+            this.SIDE_MENU = translations
+            this.my_information_menu_title = this.SIDE_MENU.MY_INFORMATION;
+            this.menuItems.forEach(x =>{
+                if(x.title === SideMenuTitles.MyInformation){
+                    x.title = this.my_information_menu_title;
+                    x.submenu = securedInfoMenuItems;
+
+                }
+            });
         })
-        
     }
 
     async processSideMenuContent(){

@@ -1,5 +1,5 @@
 <perfect-scrollbar>  
-  <form nz-form [formGroup]="securedInfoForm" class="login-form" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup]="securedInfoForm" class="login-form">
       <nz-form-item class="myinformation-form__form-item">
         <nz-form-control nzHasFeedback nzErrorTip="{{MY_INFORMATION.NAME_ALERT}}">
           <input type="text" nz-input formControlName="name" 
@@ -37,12 +37,12 @@
       </nz-form-item>
       <div nz-row>
         <div nz-col nzSpan="12">
-          <button nz-button [disabled]="isDisabled" nzType="default">
+          <button nz-button [disabled]="isDisabled" nzType="default" (click)="onDelete()">
             {{MY_INFORMATION.TURN_OFF_BTN}}
           </button>
         </div>
         <div nz-col nzSpan="12">
-          <button nz-button class="login-form-button" [nzType]="'primary'">
+          <button nz-button class="login-form-button" [nzType]="'primary'" (click)="submitForm($event)">
             {{MY_INFORMATION.SUBMIT_BTN}}
           </button>
         </div>

@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import {SecuredInformationPostRequest} from '../shared/interfaces/requests/secured-information-post.request';
 import {SecuredInformationService} from '../shared/services/secured-information/secured-information.service';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SecuredInformationResponse } from '../shared/interfaces/responses/secured-information-response.type';
 
 @Component({
   selector: 'app-my-informations',
@@ -19,6 +20,9 @@ export class MyInformationsComponent implements OnInit {
   MY_INFORMATION: any;
   userId: string;
   isEditForm: boolean;
+  securedInfo: SecuredInformationResponse;
+  @Output()
+  securedInfoChanged: EventEmitter<Event> = new EventEmitter();
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
@@ -35,7 +39,7 @@ export class MyInformationsComponent implements OnInit {
       });
     }
 
-  submitForm(): void {
+  submitForm(event: any): void {
     for (const i in this.securedInfoForm.controls) {
       this.securedInfoForm.controls[i].markAsDirty();
       this.securedInfoForm.controls[i].updateValueAndValidity();
@@ -59,9 +63,7 @@ export class MyInformationsComponent implements OnInit {
         sendDateTime: [null,[Validators.required]]
       })
       this.isDisabled = false;
-      this.securedInfoService.getByUser(this.userId).subscribe(response =>{
-        this.securedInfoService.passNextData(response)
-      })
+      this.securedInfoChanged.emit(event);
     });
   }
 
@@ -77,7 +79,9 @@ export class MyInformationsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.isEditForm){
+      this.isDisabled = false;
       this.securedInfoService.selectedSecuredInfo.subscribe(securedInfo =>{
+        this.securedInfo = securedInfo;
         this.securedInfoForm = this.fb.group({
           name: [securedInfo.name, [Validators.required]],
           information: [securedInfo.information, [Validators.required]],
@@ -94,6 +98,9 @@ export class MyInformationsComponent implements OnInit {
     })
   }
 
+  onDelete(){
+    this.securedInfoService.delete(this.securedInfo.id);
+  }
   sendDateClick(){
     this.cdr.detectChanges();
   }
