@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { SecuredInformationService } from '../../services/secured-information/secured-information.service';
 import { SideMenuTitles } from '../../enums/side-menu-titles.enum';
 import { SecuredInformationResponse } from '../../interfaces/responses/secured-information-response.type';
+import { SecuredInformationStoreService } from '../../services/secured-information/secured-information-store.service';
 
 @Component({
     selector: 'app-sidenav',
@@ -32,7 +33,8 @@ export class SideNavComponent implements OnInit{
         private authService: AuthenticationService,
         private securedInfoService: SecuredInformationService,
         private router: Router,
-        private cdr: ChangeDetectorRef) {}
+        private cdr: ChangeDetectorRef,
+        private securedInfoStore: SecuredInformationStoreService) {}
 
     async ngOnInit(): Promise<void> {
 
@@ -47,32 +49,35 @@ export class SideNavComponent implements OnInit{
 
         let securedInfoMenuItems: SideNavInterface[] = 
         new Array<SideNavInterface>();
-        this.securedInfos.forEach(item =>{
-            securedInfoMenuItems.push({
-                title : item.name,
-                iconType: 'nzIcon',
-                iconTheme: 'outline',
-                icon : 'lock',
-                submenu: [],
-                path: `secured-info/edit`,
-                isSecuredInfo: true,
-                isTouched: false,
-                id: item.id
-            })
-        });
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.translateService.get('SIDE_MENU')
-        .subscribe((translations)=> {
-            this.SIDE_MENU = translations
-            this.my_information_menu_title = this.SIDE_MENU.MY_INFORMATION;
-            this.menuItems.forEach(x =>{
-                if(x.title === SideMenuTitles.MyInformation){
-                    x.title = this.my_information_menu_title;
-                    x.submenu = securedInfoMenuItems;
-
-                }
+        this.securedInfoStore.secureInformations$.subscribe(securedInfos =>{
+            securedInfos.forEach(item =>{
+                securedInfoMenuItems.push({
+                    title : item.name,
+                    iconType: 'nzIcon',
+                    iconTheme: 'outline',
+                    icon : 'lock',
+                    submenu: [],
+                    path: `secured-info/edit`,
+                    isSecuredInfo: true,
+                    isTouched: false,
+                    id: item.id
+                })
             });
+            this.menuItems = ROUTES.filter(menuItem => menuItem);
+            this.translateService.get('SIDE_MENU')
+            .subscribe((translations)=> {
+                this.SIDE_MENU = translations
+                this.my_information_menu_title = this.SIDE_MENU.MY_INFORMATION;
+                this.menuItems.forEach(x =>{
+                    if(x.title === SideMenuTitles.MyInformation){
+                        x.title = this.my_information_menu_title;
+                        x.submenu = securedInfoMenuItems;
+    
+                    }
+                });
+            })
         })
+
     }
 
     async processSideMenuContent(){

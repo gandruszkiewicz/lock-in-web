@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { distinctUntilChanged, filter, map, startWith } from "rxjs/operators";
@@ -7,6 +7,7 @@ import { ThemeConstantService } from '../../shared/services/theme-constant.servi
 import { SecuredInformationService } from 'src/app/shared/services/secured-information/secured-information.service';
 import { SecuredInformationResponse } from 'src/app/shared/interfaces/responses/secured-information-response.type';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { SecuredInformationStoreService } from '../../shared/services/secured-information/secured-information-store.service'
 
 @Component({
     selector: 'app-common-layout',
@@ -25,8 +26,9 @@ export class CommonLayoutComponent  {
 
     constructor(private router: Router,  private activatedRoute: ActivatedRoute,
         private themeService: ThemeConstantService, 
-        private securedInfoService: SecuredInformationService,
-        private authService: AuthenticationService) {
+        private securedInfoStore: SecuredInformationStoreService,
+        private authService: AuthenticationService,
+        private cdr: ChangeDetectorRef) {
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd),
             map(() => {
@@ -48,9 +50,7 @@ export class CommonLayoutComponent  {
         if(!this.authService.currentUserValue){
             this.router.navigate(['login'])
         }
-        this.securedInfoService.getByUser(this.authService.currentUserValue.userId).subscribe(response =>{
-            this.securedInfos = response;
-        })
+        this.securedInfoStore.loadData();
     }
 
     ngOnInit() {
@@ -59,6 +59,7 @@ export class CommonLayoutComponent  {
             filter(event => event instanceof NavigationEnd),distinctUntilChanged(),
             map(data => this.buildBreadCrumb(this.activatedRoute.root))
         );
+        this.securedInformationSubscription();
         this.themeService.isMenuFoldedChanges.subscribe(isFolded => this.isFolded = isFolded);
         this.themeService.isSideNavDarkChanges.subscribe(isDark => this.isSideNavDark = isDark);
         this.themeService.selectedHeaderColor.subscribe(color => this.selectedHeaderColor = color);   
@@ -90,10 +91,13 @@ export class CommonLayoutComponent  {
         return newBreadcrumbs;
     }
     onSecuredInfoChanged(event: any){
-        let userId = this.authService.currentUserValue.userId
-        let securedInfoSub =this.securedInfoService.getByUser(userId).subscribe(response =>{
-            this.securedInfos = response
-            securedInfoSub.unsubscribe();
-        })
+
+    }
+
+    securedInformationSubscription(): void{
+        // let userId = this.authService.currentUserValue.userId
+        // let securedInfoSub =this.securedInfoStore.secureInformations$.subscribe(response =>{
+        //     this.securedInfos = response.length > 0 ? response : null;
+        // })
     }
 }

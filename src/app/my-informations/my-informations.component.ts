@@ -6,6 +6,7 @@ import {SecuredInformationService} from '../shared/services/secured-information/
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SecuredInformationResponse } from '../shared/interfaces/responses/secured-information-response.type';
+import { SecuredInformationStoreService } from '../shared/services/secured-information/secured-information-store.service';
 
 @Component({
   selector: 'app-my-informations',
@@ -29,6 +30,7 @@ export class MyInformationsComponent implements OnInit {
     private translateService: TranslateService,
     private securedInfoService: SecuredInformationService,
     private authenticationSerivce: AuthenticationService,
+    private securedInfoStore: SecuredInformationStoreService,
     private router: ActivatedRoute) {
       this.isEditForm =  window.location.href.includes('edit')
       this.securedInfoForm = this.fb.group({
@@ -54,7 +56,7 @@ export class MyInformationsComponent implements OnInit {
       IsBlocked: false
     }
     this.securedInfoService.post(postReq).subscribe(response =>{
-
+      this.securedInfoStore.loadData();
     },null, () =>{
       this.securedInfoForm = this.fb.group({
         name: [this.changeFormValueToStars(value.name), [Validators.required]],
@@ -63,7 +65,6 @@ export class MyInformationsComponent implements OnInit {
         sendDateTime: [null,[Validators.required]]
       })
       this.isDisabled = false;
-      this.securedInfoChanged.emit(event);
     });
   }
 

@@ -23,6 +23,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { SideNavDirective } from "../directives/side-nav.directive";
 import { ThemeConstantService } from '../services/theme-constant.service';
 import { SecuredInformationService } from '../services/secured-information/secured-information.service';
+import { SecuredInformationStoreService } from '../services/secured-information/secured-information-store.service';
 
 const antdModule = [
     NzAvatarModule,
@@ -62,7 +63,8 @@ const antdModule = [
         FooterComponent
     ],
     providers: [ 
-        ThemeConstantService
+        ThemeConstantService,
+        SecuredInformationStoreService
     ]
 })
 

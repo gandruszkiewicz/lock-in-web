@@ -10,6 +10,7 @@ import { ThemeConstantService } from './services/theme-constant.service';
 import { SearchPipe } from './pipes/search.pipe';
 import { AuthenticationService } from './services/authentication.service';
 import { SecuredInformationService } from './services/secured-information/secured-information.service';
+import { SecuredInformationStoreService } from './services/secured-information/secured-information-store.service';
 
 @NgModule({
     exports: [
@@ -34,7 +35,8 @@ import { SecuredInformationService } from './services/secured-information/secure
     providers: [
         ThemeConstantService,
         AuthenticationService,
-        SecuredInformationService
+        SecuredInformationService,
+        SecuredInformationStoreService
 
     ]
 })
