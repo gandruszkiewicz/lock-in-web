@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import {SecuredInformationPostRequest} from '../shared/interfaces/requests/secured-information-post.request';
+import {SecuredInformationPostRequest, SecuredInformationPutRequest} from '../shared/interfaces/requests/secured-information-post.request';
 import {SecuredInformationService} from '../shared/services/secured-information/secured-information.service';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SecuredInformationResponse } from '../shared/interfaces/responses/secured-information-response.type';
 import { SecuredInformationStoreService } from '../shared/services/secured-information/secured-information-store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-my-informations',
@@ -47,15 +48,8 @@ export class MyInformationsComponent implements OnInit {
       this.securedInfoForm.controls[i].updateValueAndValidity();
     }
     const {value} = this.securedInfoForm;
-    let postReq: SecuredInformationPostRequest = {
-      Information: value.information,
-      Name : value.name,
-      SendEmail: value.sendEmail,
-      SendDateTime : value.sendDateTime,
-      UserId: this.userId,
-      IsBlocked: false
-    }
-    this.securedInfoService.post(postReq).subscribe(response =>{
+
+    this.processSubmit(value).subscribe(response =>{
       this.securedInfoStore.loadData();
     },null, () =>{
       this.securedInfoForm = this.fb.group({
@@ -66,6 +60,39 @@ export class MyInformationsComponent implements OnInit {
       })
       this.isDisabled = false;
     });
+  }
+
+  processSubmit(value: any): Observable<any>{
+    if(this.isEditForm){
+      return this.processPutRequest(value)
+    }else{
+      return this.processPutRequest(value);
+    }
+  }
+
+  processPostRequest(value: any): Observable<any>{
+    let postReq: SecuredInformationPostRequest = {
+      Information: value.information,
+      Name : value.name,
+      SendEmail: value.sendEmail,
+      SendDateTime : value.sendDateTime,
+      UserId: this.userId,
+      IsBlocked: false
+    }
+    return this.securedInfoService.post(postReq);
+  }
+
+  processPutRequest(value: any){
+    let putReq: SecuredInformationPutRequest = {
+      Id: this.securedInfo.id,
+      Information: value.information,
+      Name : value.name,
+      SendEmail: value.sendEmail,
+      SendDateTime : value.sendDateTime,
+      UserId: this.userId,
+      IsBlocked: false
+    }
+    return this.securedInfoService.put(putReq);
   }
 
 
@@ -100,7 +127,9 @@ export class MyInformationsComponent implements OnInit {
   }
 
   onDelete(){
-    this.securedInfoService.delete(this.securedInfo.id);
+    this.securedInfoService.delete(this.securedInfo.id).subscribe(response =>{
+      this.securedInfoStore.loadData();
+    })
   }
   sendDateClick(){
     this.cdr.detectChanges();

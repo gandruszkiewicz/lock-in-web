@@ -46,9 +46,6 @@ export class SideNavComponent implements OnInit{
                 this.processSideMenuContent();
             }
         })
-        
-
-
     }
 
     processSideMenuContent(){

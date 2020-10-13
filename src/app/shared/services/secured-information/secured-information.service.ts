@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../constants/constants.service';
 import { Observable, BehaviorSubject } from 'rxjs';
-import {SecuredInformationPostRequest} from '../../interfaces/requests/secured-information-post.request'
+import {SecuredInformationPostRequest, SecuredInformationPutRequest} from '../../interfaces/requests/secured-information-post.request'
 import {SecuredInformationResponse} from '../../interfaces/responses/secured-information-response.type'
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
@@ -48,12 +48,11 @@ export class SecuredInformationService {
     return this.http.post(this.serviceBaseUrl,securedInformation);
   }
 
-  public delete(securedInfoId: number): any{
-    
-    this.http.delete(`${this.serviceBaseUrl}/${securedInfoId}`).subscribe(response =>{
-      let reduceCollection = this.securedInfosSubject.value.filter(item => item.id !== securedInfoId);
-      this.securedInfosSubject = new BehaviorSubject<SecuredInformationResponse[]>(reduceCollection);
-    });
+  public put(securedInformation: SecuredInformationPutRequest): Observable<any>{
+    return this.http.put(this.serviceBaseUrl,securedInformation);
+  }
+  public delete(securedInfoId: number): Observable<any>{
+    return this.http.delete(`${this.serviceBaseUrl}/${securedInfoId}`)
   }
 
   public getByUser(userId): Observable<SecuredInformationResponse[]>{
