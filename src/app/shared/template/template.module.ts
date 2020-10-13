@@ -63,8 +63,7 @@ const antdModule = [
         FooterComponent
     ],
     providers: [ 
-        ThemeConstantService,
-        SecuredInformationStoreService
+        ThemeConstantService
     ]
 })
 

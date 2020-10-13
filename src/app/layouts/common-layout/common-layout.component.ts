@@ -22,13 +22,10 @@ export class CommonLayoutComponent  {
     isSideNavDark : boolean;
     isExpand: boolean;
     selectedHeaderColor: string;
-    securedInfos: SecuredInformationResponse[]
 
     constructor(private router: Router,  private activatedRoute: ActivatedRoute,
         private themeService: ThemeConstantService, 
-        private securedInfoStore: SecuredInformationStoreService,
-        private authService: AuthenticationService,
-        private cdr: ChangeDetectorRef) {
+        private authService: AuthenticationService) {
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd),
             map(() => {
@@ -47,10 +44,6 @@ export class CommonLayoutComponent  {
         ).subscribe( (data: any) => {
             this.contentHeaderDisplay = data;
         });
-        if(!this.authService.currentUserValue){
-            this.router.navigate(['login'])
-        }
-        this.securedInfoStore.loadData();
     }
 
     ngOnInit() {
@@ -59,7 +52,6 @@ export class CommonLayoutComponent  {
             filter(event => event instanceof NavigationEnd),distinctUntilChanged(),
             map(data => this.buildBreadCrumb(this.activatedRoute.root))
         );
-        this.securedInformationSubscription();
         this.themeService.isMenuFoldedChanges.subscribe(isFolded => this.isFolded = isFolded);
         this.themeService.isSideNavDarkChanges.subscribe(isDark => this.isSideNavDark = isDark);
         this.themeService.selectedHeaderColor.subscribe(color => this.selectedHeaderColor = color);   
@@ -89,15 +81,5 @@ export class CommonLayoutComponent  {
             return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
         }
         return newBreadcrumbs;
-    }
-    onSecuredInfoChanged(event: any){
-
-    }
-
-    securedInformationSubscription(): void{
-        // let userId = this.authService.currentUserValue.userId
-        // let securedInfoSub =this.securedInfoStore.secureInformations$.subscribe(response =>{
-        //     this.securedInfos = response.length > 0 ? response : null;
-        // })
     }
 }

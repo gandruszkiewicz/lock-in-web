@@ -89,8 +89,7 @@ const antdModule= [
             provide: LocationStrategy, 
             useClass: PathLocationStrategy
         },
-        ThemeConstantService,
-        SecuredInformationStoreService
+        ThemeConstantService
     ],
     bootstrap: [AppComponent]
 })

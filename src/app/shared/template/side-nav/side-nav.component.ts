@@ -23,7 +23,6 @@ export class SideNavComponent implements OnInit{
     isExpand : boolean;
     SIDE_MENU: any;
     my_information_menu_title: string;
-    @Input()
     securedInfos: SecuredInformationResponse[];
     UserId: string;
 
@@ -43,13 +42,21 @@ export class SideNavComponent implements OnInit{
                 this.router.navigate(['/login']);
             }else{
                 this.UserId = user.userId;
+                this.securedInfoStore.loadData();
                 this.processSideMenuContent();
             }
         })
+        
 
+
+    }
+
+    processSideMenuContent(){
         let securedInfoMenuItems: SideNavInterface[] = 
         new Array<SideNavInterface>();
         this.securedInfoStore.secureInformations$.subscribe(securedInfos =>{
+            this.securedInfos = securedInfos;
+            securedInfoMenuItems.splice(0, securedInfoMenuItems.length);
             securedInfos.forEach(item =>{
                 securedInfoMenuItems.push({
                     title : item.name,
@@ -71,50 +78,11 @@ export class SideNavComponent implements OnInit{
                 this.menuItems.forEach(x =>{
                     if(x.title === SideMenuTitles.MyInformation){
                         x.title = this.my_information_menu_title;
-                        x.submenu = securedInfoMenuItems;
+                        x.submenu = securedInfoMenuItems
     
                     }
                 });
             })
-        })
-
-    }
-
-    async processSideMenuContent(){
-        let securedInfoMenuItems: SideNavInterface[] = 
-        new Array<SideNavInterface>();
-        await this.securedInfoService.getByUser(this.UserId).subscribe(response =>{
-            this.securedInfos = response;
-            response.forEach(item =>{
-                securedInfoMenuItems.push({
-                    title : item.name,
-                    iconType: 'nzIcon',
-                    iconTheme: 'outline',
-                    icon : 'lock',
-                    submenu: [],
-                    path: `secured-info/edit`,
-                    isSecuredInfo: true,
-                    isTouched: false,
-                    id: item.id
-                })
-            })
-        },null,() =>{
-            this.menuItems = ROUTES.filter(menuItem => menuItem);
-            this.translateService.get('SIDE_MENU')
-            .subscribe((translations)=> {
-                this.SIDE_MENU = translations
-                this.my_information_menu_title = this.SIDE_MENU.MY_INFORMATION;
-                this.menuItems.forEach(x =>{
-                    if(x.title === SideMenuTitles.MyInformation){
-                        x.title = this.my_information_menu_title;
-                        x.submenu = securedInfoMenuItems;
-    
-                    }
-                });
-            })
-            this.themeService.isMenuFoldedChanges.subscribe(isFolded => this.isFolded = isFolded);
-            this.themeService.isExpandChanges.subscribe(isExpand => this.isExpand = isExpand);
-            this.themeService.isSideNavDarkChanges.subscribe(isDark => this.isSideNavDark = isDark);
         })
     }
 

@@ -35,8 +35,7 @@ import { SecuredInformationStoreService } from './services/secured-information/s
     providers: [
         ThemeConstantService,
         AuthenticationService,
-        SecuredInformationService,
-        SecuredInformationStoreService
+        SecuredInformationService
 
     ]
 })
