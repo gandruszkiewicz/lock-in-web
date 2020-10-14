@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from './shared/services/config.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
     selector: 'app-root',
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit{
     Percentage: number = 0;
     constructor(
         public translate: TranslateService,
-        private configService: ConfigService){
+        private configService: ConfigService,
+        private modal: NzModalService){
         translate.addLangs(['en', 'pl']);
         translate.setDefaultLang('en');
         const browserLang = translate.getBrowserLang();

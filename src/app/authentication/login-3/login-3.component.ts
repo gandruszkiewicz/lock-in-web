@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserLoginRequest } from 'src/app/models/requests/user-login.request';
 import {TranslateService} from '@ngx-translate/core';
 import { ConfigService } from '../../shared/services/config.service'
+import { Subscription } from 'rxjs';
 
 @Component({
     templateUrl: './login-3.component.html'
@@ -14,6 +15,8 @@ export class Login3Component {
     loginForm: FormGroup;
     AUTHENTICATION: any;
     GENERAL: any
+    token: string;
+    progressSub: Subscription;
 
     constructor(private fb: FormBuilder,              
         private authService: AuthenticationService,
@@ -47,18 +50,27 @@ export class Login3Component {
           password : this.loginForm.value.password
         }        
         this.authService.login(reqParams.email, reqParams.password).subscribe(response => {
-          if(response.token){
-            // this.router.navigate(['/']);
-          }
+          this.token = response.token;
         },(error)=>{
           this.configService.faliedProgress();
-
+          this.onSubmitFinish(true)
         },()=>{
           this.configService.stopProgress();
+          this.onSubmitFinish(false)
         })
+    }
+
+    onSubmitFinish(isError: boolean){
+      if(this.token){
+        this.progressSub = this.configService.progressHttp$.subscribe(progress =>{
+          if(!progress.IsVisible && !isError){
+            this.router.navigate(['/']);
+          }
+        });
       }
+    }
     onSignIn(){
       this.configService.startProgress();
     }
-    
-}    
+
+}

@@ -1,11 +1,12 @@
 <router-outlet></router-outlet>
 
 <nz-modal [ngClass]="{'hidden': !isVisible}" class="modal__progress-bar" 
-[(nzVisible)] ="isVisible">
-    <nz-progress class="ant-progress-center"
+[(nzVisible)] ="isVisible" nzBodyStyle="{'background':'none'}">
+    <nz-progress class="ant-progress-center progress-backgound"
     nz-tooltip   
     nzType="circle"
     [nzPercent]="Percentage"
     [nzSuccessPercent]="Percentage"
+    [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
     ></nz-progress>
 </nz-modal>
