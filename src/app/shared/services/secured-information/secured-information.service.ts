@@ -12,38 +12,17 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class SecuredInformationService {
   serviceBaseUrl: string;
-  private securedInfosSubject: BehaviorSubject<SecuredInformationResponse[]>;
-  public securedInfos: Observable<SecuredInformationResponse[]>;
 
-  private selectedSecuredInfoSubject: BehaviorSubject<SecuredInformationResponse>;
-  public selectedSecuredInfo: Observable<SecuredInformationResponse>;
-
-  constructor(private http: HttpClient, private constants: ConstantsService, private authService: AuthenticationService) {
+  constructor(
+    private http: HttpClient,
+    private constants: ConstantsService) {
     this.serviceBaseUrl = `${constants.apiBaseUrl}/SecuredInformation`;
-    
-    this.securedInfosSubject = new BehaviorSubject<SecuredInformationResponse[]>(null);
-    this.securedInfos = this.securedInfosSubject.asObservable();
-
-    this.selectedSecuredInfoSubject = new BehaviorSubject<SecuredInformationResponse>(null);
-    this.selectedSecuredInfo = this.selectedSecuredInfoSubject.asObservable();
-    this.authService.currentUser.subscribe(user => {
-      if(user){
-        this.getByUser(user.userId).subscribe(data =>{
-          this.securedInfosSubject.next(data);
-        })
-      }
-    })
-   }
-
-  public passSelectedSecuredInfo(securedInfo: SecuredInformationResponse){
-    this.selectedSecuredInfoSubject.next(securedInfo);
   }
 
-  public passNextData(securedInfo: SecuredInformationResponse[]){
-    this.securedInfosSubject.next(securedInfo);
-    this.securedInfosSubject.complete();
-  }
 
+   public getByUser(userId): Observable<SecuredInformationResponse[]>{
+    return this.http.get<SecuredInformationResponse[]>(this.serviceBaseUrl+`/${userId}`);
+  }
   public post(securedInformation: SecuredInformationPostRequest): Observable<any>{
     return this.http.post(this.serviceBaseUrl,securedInformation);
   }
@@ -53,15 +32,5 @@ export class SecuredInformationService {
   }
   public delete(securedInfoId: number): Observable<any>{
     return this.http.delete(`${this.serviceBaseUrl}/${securedInfoId}`)
-  }
-
-  public getByUser(userId): Observable<SecuredInformationResponse[]>{
-    return this.http.get<SecuredInformationResponse[]>(this.serviceBaseUrl+`/${userId}`)
-    .pipe(map(securedInfos => {
-      if(securedInfos){
-        this.securedInfosSubject.next(securedInfos);
-      }
-      return securedInfos;
-    }))
   }
 }

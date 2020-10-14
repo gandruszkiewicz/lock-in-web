@@ -66,7 +66,7 @@ export class MyInformationsComponent implements OnInit {
     if(this.isEditForm){
       return this.processPutRequest(value)
     }else{
-      return this.processPutRequest(value);
+      return this.processPostRequest(value);
     }
   }
 
@@ -108,7 +108,7 @@ export class MyInformationsComponent implements OnInit {
   ngOnInit(): void {
     if(this.isEditForm){
       this.isDisabled = false;
-      this.securedInfoService.selectedSecuredInfo.subscribe(securedInfo =>{
+      this.securedInfoStore.selectedSecuredInfo$.subscribe(securedInfo =>{
         this.securedInfo = securedInfo;
         this.securedInfoForm = this.fb.group({
           name: [securedInfo.name, [Validators.required]],

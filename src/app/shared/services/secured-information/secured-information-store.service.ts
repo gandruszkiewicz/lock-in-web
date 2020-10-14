@@ -10,6 +10,11 @@ import { AuthenticationService } from '../authentication.service';
 export class SecuredInformationStoreService {
   private readonly _secureInformations = new BehaviorSubject<Array<SecuredInformationResponse>>([]);
   readonly secureInformations$ = this._secureInformations.asObservable();
+
+  private readonly _selectedSecuredInfo = new BehaviorSubject<SecuredInformationResponse>(null);
+  public selectedSecuredInfo$ = this._selectedSecuredInfo.asObservable();
+
+
   constructor(
     private secureInfoService: SecuredInformationService, 
     private authService: AuthenticationService) 
@@ -32,5 +37,13 @@ export class SecuredInformationStoreService {
 
   public set securedInfos(val: SecuredInformationResponse[]) {
     this._secureInformations.next(val);
+  }
+
+  public get selectedSecuredInfo(): SecuredInformationResponse{
+    return this._selectedSecuredInfo.getValue();
+  }
+
+  public set selectedSecuredInfo(val: SecuredInformationResponse){
+    this._selectedSecuredInfo.next(val);
   }
 }

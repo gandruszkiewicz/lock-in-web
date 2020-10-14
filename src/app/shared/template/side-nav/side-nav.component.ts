@@ -88,7 +88,7 @@ export class SideNavComponent implements OnInit{
         this.cdr.markForCheck();
        if(subMenuItem.isSecuredInfo){
            let selectedSecuredInfo = this.securedInfos.find(item => item.id === subMenuItem.id)
-           this.securedInfoService.passSelectedSecuredInfo(selectedSecuredInfo);
+           this.securedInfoStore.selectedSecuredInfo = selectedSecuredInfo;
            this.router.navigate([subMenuItem.path])
        }
     }
