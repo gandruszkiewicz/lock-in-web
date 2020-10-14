@@ -23,6 +23,13 @@
                     <i nz-icon [nzType]="isExpand? 'menu-fold': 'menu-unfold'" theme="outline"></i>
                 </a>
             </li>
+            <ul class="nav-left">
+                <a nz-button class="my-informations__add-form-btn" 
+                    [nzType]="'dashed'" 
+                    (click)="redirectToAddForm($event)">
+                    {{HEADER.MY_INFORMATION_ADD_BTN}}
+                </a>
+            </ul>
         </ul>
         <ul class="nav-right">
             <li>

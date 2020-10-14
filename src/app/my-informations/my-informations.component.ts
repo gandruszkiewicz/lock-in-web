@@ -20,6 +20,7 @@ export class MyInformationsComponent implements OnInit {
   textValue: string;
   isDisabled: boolean = true;
   MY_INFORMATION: any;
+  SIDE_MENU: any;
   userId: string;
   isEditForm: boolean;
   securedInfo: SecuredInformationResponse;
@@ -32,7 +33,7 @@ export class MyInformationsComponent implements OnInit {
     private securedInfoService: SecuredInformationService,
     private authenticationSerivce: AuthenticationService,
     private securedInfoStore: SecuredInformationStoreService,
-    private router: ActivatedRoute) {
+    private router: Router) {
       this.isEditForm =  window.location.href.includes('edit')
       this.securedInfoForm = this.fb.group({
         name: [null, [Validators.required]],
@@ -123,6 +124,9 @@ export class MyInformationsComponent implements OnInit {
     })
     this.translateService.get("MY_INFORMATION").subscribe((translations) =>{
       this.MY_INFORMATION = translations;
+    })
+    this.translateService.get("SIDE_MENU").subscribe((tranlations) =>{
+      this.SIDE_MENU = tranlations;
     })
   }
 

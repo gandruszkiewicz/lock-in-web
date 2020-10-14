@@ -14,6 +14,9 @@
         "TERM_AND_CONDITIONS":"Zasady i warunki",
         "PRIVACY_POLICY":"Polityka prywatności"
     },
+    "HEADER":{
+        "MY_INFORMATION_ADD_BTN": "Dodaj informację"
+    },
     "SIDE_MENU": {
         "MY_INFORMATION" : "Moje informacje"
     },

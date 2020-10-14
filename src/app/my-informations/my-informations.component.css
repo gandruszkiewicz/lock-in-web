@@ -55,7 +55,6 @@ nz-week-picker {
 ::ng-deep .ant-form-item-label>label::after{
   content: none;
 }
-/* nz-form-label{
-  white-space: normal;
-  float: left;
-} */
+.my-informations__title{
+  margin-bottom: 10%;
+}

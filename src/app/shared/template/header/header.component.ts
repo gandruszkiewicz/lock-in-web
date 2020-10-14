@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ThemeConstantService } from '../../services/theme-constant.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -14,12 +15,19 @@ export class HeaderComponent{
     isFolded : boolean;
     isExpand : boolean;
     QUICK_VIEW: any;
+    HEADER: any;
 
-    constructor( private themeService: ThemeConstantService, private translateService: TranslateService) {}
+    constructor( 
+        private themeService: ThemeConstantService, 
+        private translateService: TranslateService,
+        private router: Router) {}
 
     ngOnInit(): void {
         this.translateService.get('QUICK_VIEW').subscribe(translations =>{
             this.QUICK_VIEW = translations;
+        })
+        this.translateService.get('HEADER').subscribe(translations =>{
+            this.HEADER = translations;
         })
         this.themeService.isMenuFoldedChanges.subscribe(isFolded => this.isFolded = isFolded);
         this.themeService.isExpandChanges.subscribe(isExpand => this.isExpand = isExpand);
@@ -44,6 +52,10 @@ export class HeaderComponent{
     quickViewToggle(): void {
         this.quickViewVisible = !this.quickViewVisible;
     }
+
+    redirectToAddForm(event:any): void{
+        this.router.navigate(['']);
+      }
 
     notificationList = [
         {
