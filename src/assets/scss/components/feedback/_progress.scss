@@ -134,5 +134,11 @@
     .ant-progress-bg {
         height: 4px !important;
     }
-}  
+} 
+
+.ant-progress-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
