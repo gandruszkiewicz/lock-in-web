@@ -1,12 +1,11 @@
-<h4 class="my-informations__title">example</h4>
 <router-outlet></router-outlet>
 
-<nz-modal class="modal__progress-bar" 
+<nz-modal [ngClass]="{'hidden': !isVisible}" class="modal__progress-bar" 
 [(nzVisible)] ="isVisible">
     <nz-progress class="ant-progress-center"
     nz-tooltip   
     nzType="circle"
-    [nzPercent]="100"
-    [nzSuccessPercent]="100"
+    [nzPercent]="Percentage"
+    [nzSuccessPercent]="Percentage"
     ></nz-progress>
 </nz-modal>

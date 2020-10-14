@@ -1,4 +1,5 @@
 export interface ProgressHttp{
     IsVisible: boolean,
-    Percetage: boolean
+    Percentage: number,
+    source: string
 }
