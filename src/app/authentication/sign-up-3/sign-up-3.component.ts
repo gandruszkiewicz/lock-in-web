@@ -21,6 +21,13 @@ export class SignUp3Component {
     token: string;
     progressSub: Subscription;
 
+    constructor(private fb: FormBuilder,
+        private authService: AuthenticationService,
+        private router: Router,
+        private translateService: TranslateService,
+        private configService: ConfigService) {
+    }
+
     submitForm(): void {
         for (const i in this.signUpForm.controls) {
             this.signUpForm.controls[ i ].markAsDirty();
@@ -68,13 +75,6 @@ export class SignUp3Component {
         } else if (control.value !== this.signUpForm.controls.password.value) {
             return { confirm: true, error: true };
         }
-    }
-
-    constructor(private fb: FormBuilder,
-                private authService: AuthenticationService,
-                private router: Router,
-                private translateService: TranslateService,
-                private configService: ConfigService) {
     }
 
     ngOnInit(): void {

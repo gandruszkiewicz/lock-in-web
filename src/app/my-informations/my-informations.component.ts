@@ -7,7 +7,8 @@ import { AuthenticationService } from '../shared/services/authentication.service
 import { Router, ActivatedRoute } from '@angular/router';
 import { SecuredInformationResponse } from '../shared/interfaces/responses/secured-information-response.type';
 import { SecuredInformationStoreService } from '../shared/services/secured-information/secured-information-store.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { ConfigService } from '../shared/services/config.service';
 
 @Component({
   selector: 'app-my-informations',
@@ -26,6 +27,7 @@ export class MyInformationsComponent implements OnInit {
   securedInfo: SecuredInformationResponse;
   @Output()
   securedInfoChanged: EventEmitter<Event> = new EventEmitter();
+  progressSub: Subscription;
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
@@ -33,6 +35,7 @@ export class MyInformationsComponent implements OnInit {
     private securedInfoService: SecuredInformationService,
     private authenticationSerivce: AuthenticationService,
     private securedInfoStore: SecuredInformationStoreService,
+    private configService: ConfigService,
     private router: Router) {
       this.isEditForm =  window.location.href.includes('edit')
       this.securedInfoForm = this.fb.group({
@@ -44,6 +47,7 @@ export class MyInformationsComponent implements OnInit {
     }
 
   submitForm(event: any): void {
+    this.onClickSubmit();
     for (const i in this.securedInfoForm.controls) {
       this.securedInfoForm.controls[i].markAsDirty();
       this.securedInfoForm.controls[i].updateValueAndValidity();
@@ -52,7 +56,9 @@ export class MyInformationsComponent implements OnInit {
 
     this.processSubmit(value).subscribe(response =>{
       this.securedInfoStore.loadData();
-    },null, () =>{
+    },(error) =>{
+      this.configService.faliedProgress()
+    }, () =>{
       this.securedInfoForm = this.fb.group({
         name: [this.changeFormValueToStars(value.name), [Validators.required]],
         information: [this.changeFormValueToStars(value.information), [Validators.required]],
@@ -60,7 +66,18 @@ export class MyInformationsComponent implements OnInit {
         sendDateTime: [null,[Validators.required]]
       })
       this.isDisabled = false;
+      this.configService.stopProgress()
     });
+  }
+
+  onSubmitFinish(isError: boolean){
+    this.progressSub = this.configService.progressHttp$.subscribe(progress =>{
+      if(progress.IsVisible && !isError){
+        //this.configService.stopProgress()
+      }else if(isError){
+        //this.configService.faliedProgress()
+      }
+    });    
   }
 
   processSubmit(value: any): Observable<any>{
@@ -131,10 +148,24 @@ export class MyInformationsComponent implements OnInit {
   }
 
   onDelete(){
+    this.configService.startProgress()
     this.securedInfoService.delete(this.securedInfo.id).subscribe(response =>{
       this.securedInfoStore.loadData();
+      this.configService.stopProgress();
+      this.securedInfoForm = this.fb.group({
+        name: [null, [Validators.required]],
+        information: [null, [Validators.required]],
+        sendEmail: [null, [Validators.required, Validators.email]],
+        sendDateTime: [null,[Validators.required]]
+      })
+      
     })
   }
+
+  onClickSubmit(){
+    this.configService.startProgress();
+  }
+
   sendDateClick(){
     this.cdr.detectChanges();
   }
