@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { UserRegisterRequest } from 'src/app/models/requests/user-register-request';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { ConfigService } from 'src/app/shared/services/config.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,6 +18,8 @@ export class SignUp3Component {
     signUpForm: FormGroup;
     AUTHENTICATION: any;
     GENERAL: any;
+    token: string;
+    progressSub: Subscription;
 
     submitForm(): void {
         for (const i in this.signUpForm.controls) {
@@ -29,11 +33,29 @@ export class SignUp3Component {
             value.password
         )
         this.authService.register(reqParams).subscribe(response => {
-        if(response.token){
-            localStorage.setItem('token',response.token);
-            this.router.navigate(['/']);
-        }
+            this.token = response.token;
+            
+        },(error)=>{
+          this.configService.faliedProgress();
+          this.onSubmitFinish(true)
+        },()=>{
+          this.configService.stopProgress();
+          this.onSubmitFinish(false)
         })
+    }
+
+    onSubmitFinish(isError: boolean){
+        if(this.token){
+          this.progressSub = this.configService.progressHttp$.subscribe(progress =>{
+            if(!progress.IsVisible && !isError){
+              this.router.navigate(['/']);
+            }
+          });
+        }
+    }
+
+    onSignUp(){
+        this.configService.startProgress();
     }
 
     updateConfirmValidator(): void {
@@ -51,7 +73,8 @@ export class SignUp3Component {
     constructor(private fb: FormBuilder,
                 private authService: AuthenticationService,
                 private router: Router,
-                private translateService: TranslateService) {
+                private translateService: TranslateService,
+                private configService: ConfigService) {
     }
 
     ngOnInit(): void {
