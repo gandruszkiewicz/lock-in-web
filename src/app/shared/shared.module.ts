@@ -11,6 +11,8 @@ import { SearchPipe } from './pipes/search.pipe';
 import { AuthenticationService } from './services/authentication.service';
 import { SecuredInformationService } from './services/secured-information/secured-information.service';
 import { SecuredInformationStoreService } from './services/secured-information/secured-information-store.service';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+
 
 @NgModule({
     exports: [
@@ -20,7 +22,8 @@ import { SecuredInformationStoreService } from './services/secured-information/s
         HttpClientJsonpModule,
         NzIconModule,
         PerfectScrollbarModule,
-        SearchPipe
+        SearchPipe,
+        NzMessageModule
     ],
     imports: [
         RouterModule,
