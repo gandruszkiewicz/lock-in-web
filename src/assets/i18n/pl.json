@@ -3,7 +3,10 @@
         "LEGAL": "Regulamin",
         "PRIVACY": "Polityka prywatności",
         "I_HAVE_READ_THE":"Zapoznałem się z",
-        "AGREEMENT":"regulaminem"
+        "AGREEMENT":"regulaminem",
+        "ERROR": "Błąd",
+        "SUCCESS": "Sukces",
+        "ERROR_DEFAULT": "Wystąpił błąd"
     },
     "QUICK_VIEW":{
         "TITLE":"Profil użytkownika",
@@ -32,7 +35,11 @@
         "SIGN_UP": "Załóż konto",
         "SIGN_IN":"Zaloguj się",
         "EMAIL":"Adres e-mail",
-        "EMAIL_ALERT":"Podany adres e-mail jest nieprawidłowy"
+        "EMAIL_ALERT":"Podany adres e-mail jest nieprawidłowy",
+        "LOGIN_404": "Użytkownik, o podanym adresie e-mail, nie istnieje",
+        "LOGIN_422": "Niepoprawne hasło",
+        "SIGNUP_400": "Hasło musi mieć przynajmniej jeden znak specjalny np '?' czy '!'. Hasło usi mieć przynajmniej jedną cyfrę ('0'-'9'). Hasło usi mieć przynajmniej jedną dużą literę.",
+        "SIGNUP_409": "Użytkownik z podanym adresem e-mail już istnieje"
     },
     "MY_INFORMATION":{
         "NAME_ALERT":"Wprowadź nazwę wiadomości!",

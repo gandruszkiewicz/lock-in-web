@@ -3,7 +3,10 @@
         "LEGAL": "Legal",
         "PRIVACY": "Privacy",
         "I_HAVE_READ_THE":"I have read the",
-        "AGREEMENT":"agreement"
+        "AGREEMENT":"agreement",
+        "ERROR": "Error",
+        "SUCCESS": "Success",
+        "ERROR_DEFAULT": "Error occur"
     },
     "QUICK_VIEW":{
         "TITLE":"User profile",
@@ -30,9 +33,13 @@
         "CONFIRM_PASSWORD":"Confirm Password",
         "DONT_HAVE_ACCOUNT": "Don't have an account?",
         "SIGN_UP": "Signup",
-        "SIGN_IN":"Sign In",
-        "EMAIL":"Email",
-        "EMAIL_ALERT":"The input is not valid E-mail!"
+        "SIGN_IN": "Sign In",
+        "EMAIL": "Email",
+        "EMAIL_ALERT": "The input is not valid E-mail!",
+        "LOGIN_404": "User with provided e-mail address, don't exist.",
+        "LOGIN_422": "Wrong password",
+        "SIGNUP_400": "Passwords must have at least one non alphanumeric character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').",
+        "SIGNUP_409": "User with this email already exists"
         
     },
     "MY_INFORMATION":{

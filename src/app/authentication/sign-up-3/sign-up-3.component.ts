@@ -90,7 +90,7 @@ export class SignUp3Component {
           })
         this.signUpForm = this.fb.group({
             // userName         : [ null, [ Validators.required ] ],
-            email            : [ null, [ Validators.required ] ],
+            email            : [ null, [ Validators.required, Validators.email ] ],
             password         : [ null, [ Validators.required ] ],
             checkPassword    : [ null, [ Validators.required, this.confirmationValidator ] ],
             agree            : [ false ]
@@ -104,13 +104,13 @@ export class SignUp3Component {
         }
         switch(error.status){
           case 400:
-            message.content = "Passwords must have at least one non alphanumeric character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').";
+            message.content = this.AUTHENTICATION.SIGNUP_400;
             break;
           case 409:
-            message.content = "User with this email already exists";
+            message.content = this.AUTHENTICATION.SIGNUP_409;
             break
           default:
-            message.content = "Error occur";
+            message.content = this.GENERAL.ERROR_DEFAULT;
             break;
         }
         this.messageService.message = message

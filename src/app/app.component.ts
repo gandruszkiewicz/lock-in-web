@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from './shared/services/config.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { MessagesService, Message } from './shared/services/messages/messages.service'
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzNotificationService, NzNotificationDataOptions } from 'ng-zorro-antd/notification';
 
 @Component({
     selector: 'app-root',
@@ -42,10 +42,13 @@ export class AppComponent implements OnInit{
         }
         const {content} = message;
         const {isError} = message;
+        const options : NzNotificationDataOptions = {
+            nzDuration: 10000
+        };
         if(isError){
-          this.notification.error("Error",content,{nzDuration: 0});
+          this.notification.error("Error",content, options);
         }else if(!isError){
-          this.notification.success("Success",content,{nzDuration: 0})
+          this.notification.success("Success",content, options)
         }
         
       };

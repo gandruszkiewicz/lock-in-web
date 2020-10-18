@@ -36,7 +36,7 @@ export class Login3Component {
         this.GENERAL = translations;
       })
         this.loginForm = this.fb.group({
-            userName: [ null, [ Validators.required ] ],
+            userName: [ null, [ Validators.required, , Validators.email  ] ],
             password: [ null, [ Validators.required ] ]
         });
     }
@@ -85,16 +85,21 @@ export class Login3Component {
       }
       switch(error.status){
         case 404:
-          message.content = "User dosen't exist";
+          message.content = this.AUTHENTICATION.LOGIN_404;
           break;
         case 422:
-          message.content = "Wrong password";
+          message.content = this.AUTHENTICATION.LOGIN_422;
           break;
         default:
-          message.content = "Error occur";
+          message.content = this.GENERAL.ERROR_DEFAULT;
           break;
       }
       this.messageService.message = message
+    }
+
+    isFormValid(): boolean{
+      const {userName, password} = this.loginForm.controls;
+      return (userName.valid && userName.touched) && (password.valid && password.touched);
     }
 
 }
