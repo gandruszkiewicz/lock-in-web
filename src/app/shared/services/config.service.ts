@@ -10,7 +10,8 @@ export class ConfigService {
   private readonly _progressHttp = new BehaviorSubject<ProgressHttp>({
     IsVisible: false,
     Percentage: 0,
-    source: ''
+    source: '',
+    isError: false
   });
   readonly progressHttp$ = this._progressHttp.asObservable();
 
@@ -43,7 +44,8 @@ export class ConfigService {
           this.progressHttp = {
             IsVisible: true,
             Percentage: currentVal + 10,
-            source: 'startProgress'
+            source: 'startProgress',
+            isError: false
           }
         }
       }
@@ -67,7 +69,8 @@ export class ConfigService {
           this.progressHttp = {
             IsVisible: true,
             Percentage: currentVal + 10,
-            source: 'stopProgress'
+            source: 'stopProgress',
+            isError: false
           }
         }
       }
@@ -79,29 +82,35 @@ export class ConfigService {
     this.isStartProgress = false
     this.isStartStopProgress = false;
     let interval = setInterval(() =>{
+      const errorInterval = this.progressHttp.errorInterval 
+      ? this.progressHttp.errorInterval
+      : 0;  
       if(!this.isStartFailedProgress){
         clearInterval(interval);
       }else{
-        let currentVal = this.progressHttp.Percentage
-        if(currentVal === 0){
+        if(errorInterval === 30){
           this.setDefaultData();
-          clearInterval(interval)
+          clearInterval(interval);
         }else{
+          let currentVal = this.progressHttp.Percentage
           this.progressHttp = {
             IsVisible: true,
-            Percentage: currentVal - 10,
-            source: 'faliedProgress'
+            Percentage: currentVal,
+            source: 'faliedProgress',
+            isError: true,
+            errorInterval: errorInterval + 10
           }
         }
       }
-    },20)
+    },100)
   }
 
   private setDefaultData(){
     this.progressHttp = {
       IsVisible : false,
       Percentage: 0,
-      source: 'setDefaultData'
+      source: 'setDefaultData',
+      isError: false
     }
   }
 }

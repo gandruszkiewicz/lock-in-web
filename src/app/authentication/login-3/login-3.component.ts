@@ -55,7 +55,7 @@ export class Login3Component {
         this.authService.login(reqParams.email, reqParams.password).subscribe(response => {
           this.token = response.token;
         },(error : HttpErrorResponse)=>{
-          this.messageService.message = this.processErrorMessage(error);
+          this.processErrorMessage(error);
           this.configService.faliedProgress();
           this.onSubmitFinish(true)
         },()=>{
@@ -78,7 +78,7 @@ export class Login3Component {
     }
 
 
-    processErrorMessage(error: HttpErrorResponse): Message{
+    processErrorMessage(error: HttpErrorResponse): void{
       let message: Message = {
         isError: true,
         content: ''
@@ -89,11 +89,12 @@ export class Login3Component {
           break;
         case 422:
           message.content = "Wrong password";
+          break;
         default:
           message.content = "Error occur";
           break;
       }
-      return message
+      this.messageService.message = message
     }
 
 }

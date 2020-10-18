@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { ConfigService } from 'src/app/shared/services/config.service';
 import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Message, MessagesService } from '../../shared/services/messages/messages.service';
 
 
 @Component({
@@ -25,7 +27,8 @@ export class SignUp3Component {
         private authService: AuthenticationService,
         private router: Router,
         private translateService: TranslateService,
-        private configService: ConfigService) {
+        private configService: ConfigService,
+        private messageService: MessagesService) {
     }
 
     submitForm(): void {
@@ -42,12 +45,13 @@ export class SignUp3Component {
         this.authService.register(reqParams).subscribe(response => {
             this.token = response.token;
             
-        },(error)=>{
-          this.configService.faliedProgress();
-          this.onSubmitFinish(true)
+        },(error: HttpErrorResponse)=>{
+            this.processErrorMessage(error)
+            this.configService.faliedProgress();
+            this.onSubmitFinish(true)
         },()=>{
-          this.configService.stopProgress();
-          this.onSubmitFinish(false)
+            this.configService.stopProgress();
+            this.onSubmitFinish(false)
         })
     }
 
@@ -92,4 +96,23 @@ export class SignUp3Component {
             agree            : [ false ]
         });
     }
+
+    processErrorMessage(error: HttpErrorResponse): void{
+        let message: Message = {
+          isError: true,
+          content: ''
+        }
+        switch(error.status){
+          case 400:
+            message.content = "Passwords must have at least one non alphanumeric character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').";
+            break;
+          case 409:
+            message.content = "User with this email already exists";
+            break
+          default:
+            message.content = "Error occur";
+            break;
+        }
+        this.messageService.message = message
+      }
 }    

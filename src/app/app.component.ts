@@ -13,6 +13,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class AppComponent implements OnInit{
     isVisible: boolean = false;
     Percentage: number = 0;
+    isErrorHttp: boolean;
     constructor(
         public translate: TranslateService,
         private configService: ConfigService,
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit{
         this.configService.progressHttp$.subscribe(progressHttp =>{
             this.isVisible = progressHttp.IsVisible;
             this.Percentage = progressHttp.Percentage;
+            this.isErrorHttp = progressHttp.isError;
         })
         this.messageService.message$.subscribe(message =>{
             this.sendNotification(message)
@@ -41,9 +43,9 @@ export class AppComponent implements OnInit{
         const {content} = message;
         const {isError} = message;
         if(isError){
-          this.notification.error("",content);
+          this.notification.error("Error",content,{nzDuration: 0});
         }else if(!isError){
-          this.notification.success("",content)
+          this.notification.success("Success",content,{nzDuration: 0})
         }
         
       };
