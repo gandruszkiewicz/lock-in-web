@@ -1,0 +1,2 @@
+<app-login *ngIf="!isAuthenticated" [isBlockedProcess]="'true'"></app-login>
+<app-my-informations-blocked-action [securedInfoId]="securedInfoId" *ngIf="isAuthenticated"></app-my-informations-blocked-action>

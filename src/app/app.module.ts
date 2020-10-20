@@ -36,6 +36,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { MyInformationsBlockedLayoutComponent } from './my-informations-blocked/layout/my-informations-blocked-layout/my-informations-blocked-layout.component';
+import { MyInformationsBlockedActionComponent } from './my-informations-blocked/blocked-action/my-informations-blocked-action/my-informations-blocked-action.component';
+import { Login3Component } from './authentication/login-3/login-3.component';
 
 registerLocaleData(en);
 
@@ -61,7 +64,10 @@ const antdModule= [
     declarations: [
         AppComponent,
         CommonLayoutComponent,
-        MyInformationsComponent
+        MyInformationsComponent,
+        MyInformationsBlockedLayoutComponent,
+        MyInformationsBlockedActionComponent,
+        Login3Component
     ],
     imports: [
         BrowserModule,

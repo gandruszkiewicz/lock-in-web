@@ -34,7 +34,6 @@ const antdModule= [
         ...antdModule
     ],
     declarations: [
-        Login3Component,
         SignUp3Component,
         Error1Component,
         Error2Component

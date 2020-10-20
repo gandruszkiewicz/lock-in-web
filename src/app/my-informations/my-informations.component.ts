@@ -9,6 +9,7 @@ import { SecuredInformationResponse } from '../shared/interfaces/responses/secur
 import { SecuredInformationStoreService } from '../shared/services/secured-information/secured-information-store.service';
 import { Observable, Subscription } from 'rxjs';
 import { ConfigService } from '../shared/services/config.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-my-informations',
@@ -106,7 +107,7 @@ export class MyInformationsComponent implements OnInit {
       Information: value.information,
       Name : value.name,
       SendEmail: value.sendEmail,
-      SendDateTime : value.sendDateTime,
+      SendDateTime : moment(value.sendDateTime).format('YYYY-MM-DD[T]HH:mm:ss.SSSZ'),
       UserId: this.userId,
       IsBlocked: false
     }

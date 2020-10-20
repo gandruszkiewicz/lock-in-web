@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
 import {AuthenticationService} from '../../shared/services/authentication.service'
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MessagesService, Message } from 'src/app/shared/services/messages/messages.service';
 
 @Component({
+    selector: 'app-login',
     templateUrl: './login-3.component.html'
 })
 
@@ -19,6 +20,8 @@ export class Login3Component {
     GENERAL: any
     token: string;
     progressSub: Subscription;
+    @Input()
+    isBlockedProcess?: boolean = false;
 
     constructor(private fb: FormBuilder,              
         private authService: AuthenticationService,
@@ -67,7 +70,7 @@ export class Login3Component {
     onSubmitFinish(isError: boolean){
       if(this.token){
         this.progressSub = this.configService.progressHttp$.subscribe(progress =>{
-          if(!progress.IsVisible && !isError){
+          if(!progress.IsVisible && !isError && !this.isBlockedProcess){
             this.router.navigate(['/']);
           }
         });

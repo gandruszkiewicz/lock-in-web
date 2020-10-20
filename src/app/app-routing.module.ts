@@ -6,6 +6,7 @@ import { CommonLayout_ROUTES } from "./shared/routes/common-layout.routes";
 import { Login3Component } from './authentication/login-3/login-3.component';
 import { SignUp3Component } from './authentication/sign-up-3/sign-up-3.component';
 import { MyInformationsComponent } from './my-informations/my-informations.component';
+import { MyInformationsBlockedLayoutComponent } from './my-informations-blocked/layout/my-informations-blocked-layout/my-informations-blocked-layout.component';
 
 const appRoutes: Routes = [
     { 
@@ -20,6 +21,10 @@ const appRoutes: Routes = [
     {
         path:'signup',
         component: SignUp3Component
+    },
+    {
+        path:'blocked/:id',
+        component: MyInformationsBlockedLayoutComponent
     }
     
 ];
