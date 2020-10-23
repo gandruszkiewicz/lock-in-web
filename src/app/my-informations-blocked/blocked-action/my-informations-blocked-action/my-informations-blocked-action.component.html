@@ -1,1 +1,33 @@
-<p>SecuredInfoId {{securedInfoId}}</p>
+<div class="container-fluid p-h-0 p-v-20 h-100 bg" style="background-image: url('assets/images/others/login-3.png')">
+    <div class="d-flex flex-column justify-content-between h-100">
+        <div class="d-none d-md-block"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-5 m-h-auto">
+                    <nz-card class="m-b-100 shadow-lg">
+                        <div class="d-flex align-items-center justify-content-between m-b-30">
+                            <img class="img-fluid" alt="" src="assets/images/logo/logo.png">
+                            <h2 class="m-b-0">Turn off</h2>
+                        </div>
+                        <div nz-row class="my-information-blocked__turn-off-btn" nzJustify="center">
+                            <div nz-col nzSpan="12">
+                                <button nz-button nzType="primary" (click)="onTurnOff()">Turn off</button>
+                            </div>
+                        </div>
+                    </nz-card>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-md-flex p-h-40 justify-content-between">
+            <span class="">© 2020 Lock.in</span>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a class="text-dark text-link" href="">{{GENERAL.LEGAL}}</a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="text-dark text-link" href="">{{GENERAL.PRIVACY}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -33,4 +33,8 @@ export class SecuredInformationService {
   public delete(securedInfoId: number): Observable<any>{
     return this.http.delete(`${this.serviceBaseUrl}/${securedInfoId}`)
   }
+
+  public isAssignedToUser(userId: string, securedInfoId: number): Observable<boolean>{
+    return this.http.get<boolean>(`${this.serviceBaseUrl}/${userId}/${securedInfoId}`);
+  }
 }
