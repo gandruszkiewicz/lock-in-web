@@ -101,7 +101,7 @@ const antdModule= [
             useClass: PathLocationStrategy
         },
         ThemeConstantService,
-        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true  }
     ],
     bootstrap: [AppComponent]
 })
