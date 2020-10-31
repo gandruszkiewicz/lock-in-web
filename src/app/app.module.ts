@@ -19,7 +19,8 @@ import { CommonLayoutComponent } from './layouts/common-layout/common-layout.com
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS,} from '@angular/common/http';
+import {JwtInterceptor} from './shared/interceptor/token.interceptor';
 
 import { NgChartjsModule } from 'ng-chartjs';
 import { ThemeConstantService } from './shared/services/theme-constant.service';
@@ -99,7 +100,8 @@ const antdModule= [
             provide: LocationStrategy, 
             useClass: PathLocationStrategy
         },
-        ThemeConstantService
+        ThemeConstantService,
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
 })
