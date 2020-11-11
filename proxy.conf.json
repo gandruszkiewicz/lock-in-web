@@ -1,6 +1,6 @@
 {
     "/api/v1": {
-      "target": "https://localhost:443",
+      "target": "http://lockin-dev.us-west-2.elasticbeanstalk.com",
       "secure": false,
       "changeOrigin": true
     }

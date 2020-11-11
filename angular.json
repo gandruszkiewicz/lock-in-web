@@ -70,8 +70,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "enlink:build",
-            "proxyConfig": "./proxy.conf.json"
+            "browserTarget": "enlink:build"
           },
           "configurations": {
             "production": {
@@ -126,6 +125,10 @@
               "devServerTarget": "enlink:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }

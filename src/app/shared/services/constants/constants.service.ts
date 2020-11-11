@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ConstantsService {
 
-  public apiBaseUrl: string ="http://localhost:4200/api/v1";
+  public apiBaseUrl: string ="http://lockin-dev.us-west-2.elasticbeanstalk.com/api/v1";
   constructor() { }
 }
