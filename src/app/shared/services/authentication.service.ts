@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {ConstantsService} from './constants/constants.service'
@@ -22,6 +22,10 @@ export class AuthenticationService {
 
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
+    }
+
+    unlock(userId: string): Observable<any>{
+        return this.http.post<any>(this.serviceBaseUrl+`/unlock?userId=${userId}`, null);
     }
 
     login(email: string, password: string) {

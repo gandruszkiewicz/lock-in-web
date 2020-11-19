@@ -28,7 +28,7 @@ const appRoutes: Routes = [
         component: MyInformationsBlockedLayoutComponent
     },
     {
-        path:'activate/:id',
+        path:'activate/:userId',
         component: ActivationLayoutComponent
     }
     

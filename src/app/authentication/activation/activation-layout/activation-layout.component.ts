@@ -9,23 +9,19 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 })
 export class ActivationLayoutComponent implements OnInit {
   isAuthenticated: boolean;
-  securedInfoId: number;
+  userId: string;
   constructor(
     private router: Router,
     private authService: AuthenticationService,
     private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.authService.currentUser.subscribe(user =>{
-      if(user?.token){
-        this.isAuthenticated = true;
-        this.activateRoute.params.subscribe(params =>{
-          this.securedInfoId = Number(params.id);
-        })
-      }else{
-        this.isAuthenticated = false;
-      }
-  })
+    this.activateRoute.params.subscribe(params =>{
+      this.userId = params.userId;
+      this.authService.unlock(this.userId).subscribe((response)=>{
+        this.router.navigate(['login']);
+      })
+    })
   }
 
 }
