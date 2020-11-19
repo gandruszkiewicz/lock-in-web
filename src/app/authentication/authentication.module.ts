@@ -15,6 +15,8 @@ import { Login3Component } from './login-3/login-3.component';
 import { SignUp3Component } from './sign-up-3/sign-up-3.component';
 import { Error1Component } from './error-1/error-1.component';
 import { Error2Component } from './error-2/error-2.component';
+import { ActivationLayoutComponent } from './activation/activation-layout/activation-layout.component';
+import { ActivationComponent } from './activation/activation/activation.component';
 
 const antdModule= [
     NzFormModule,
@@ -36,7 +38,9 @@ const antdModule= [
     declarations: [
         SignUp3Component,
         Error1Component,
-        Error2Component
+        Error2Component,
+        ActivationLayoutComponent,
+        ActivationComponent
     ]
 })
 
