@@ -59,6 +59,10 @@ export class SignUp3Component {
         if(this.token){
           this.progressSub = this.configService.progressHttp$.subscribe(progress =>{
             if(!progress.IsVisible && !isError){
+              this.messageService.message = {
+                isError: false,
+                content: this.AUTHENTICATION.SIGNUP_SUCCESS
+              }
               this.router.navigate(['/']);
             }
           });

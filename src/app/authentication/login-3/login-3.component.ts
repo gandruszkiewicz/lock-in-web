@@ -93,6 +93,9 @@ export class Login3Component {
         case 422:
           message.content = this.AUTHENTICATION.LOGIN_422;
           break;
+        case 403:
+          message.content = this.AUTHENTICATION.LOGIN_403;
+          break;
         default:
           message.content = this.GENERAL.ERROR_DEFAULT;
           break;

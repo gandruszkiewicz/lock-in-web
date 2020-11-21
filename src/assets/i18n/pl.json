@@ -38,8 +38,10 @@
         "EMAIL_ALERT":"Podany adres e-mail jest nieprawidłowy",
         "LOGIN_404": "Użytkownik, o podanym adresie e-mail, nie istnieje",
         "LOGIN_422": "Niepoprawne hasło",
+        "LOGIN_403": "Konto nie zostało aktywowane. Ponownie przesłaliśmy wiadomość aktywacyjną, na podany adres e-mail. Aktywuj konto, aby się zalogować",
         "SIGNUP_400": "Hasło musi mieć przynajmniej jeden znak specjalny np '?' czy '!'. Hasło usi mieć przynajmniej jedną cyfrę ('0'-'9'). Hasło usi mieć przynajmniej jedną dużą literę.",
-        "SIGNUP_409": "Użytkownik z podanym adresem e-mail już istnieje"
+        "SIGNUP_409": "Użytkownik z podanym adresem e-mail już istnieje",
+        "SIGNUP_SUCCESS": "Na podany e-mail wysłaliśmy mail aktywacyjny. Poprzez przesłany link potwierdź założenie konta."
     },
     "MY_INFORMATION":{
         "NAME_ALERT":"Wprowadź nazwę wiadomości!",

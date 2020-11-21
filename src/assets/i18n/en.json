@@ -38,8 +38,10 @@
         "EMAIL_ALERT": "The input is not valid E-mail!",
         "LOGIN_404": "User with provided e-mail address, don't exist.",
         "LOGIN_422": "Wrong password",
+        "LOGIN_403": "Your account hasn't been activated. We sent again activation mail on your e-mail address. In the sent message, click red button to confirm sign up.",
         "SIGNUP_400": "Passwords must have at least one non alphanumeric character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').",
-        "SIGNUP_409": "User with this email already exists"
+        "SIGNUP_409": "User with this email already exists",
+        "SIGNUP_SUCCESS": "We send activation mail on your e-mail address. In the sent message, click red button to confirm sign up."
         
     },
     "MY_INFORMATION":{
