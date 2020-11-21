@@ -44,6 +44,9 @@
         "SIGNUP_SUCCESS": "We send activation mail on your e-mail address. In the sent message, click red button to confirm sign up."
         
     },
+    "ACCOUNT_ACTIVATION":{
+        "SUCCESS": "Your account has been activated"
+    },
     "MY_INFORMATION":{
         "NAME_ALERT":"Please input information message name!",
         "NAME_PLACEHOLDER":"Input message name",

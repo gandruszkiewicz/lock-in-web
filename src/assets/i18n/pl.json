@@ -43,6 +43,9 @@
         "SIGNUP_409": "Użytkownik z podanym adresem e-mail już istnieje",
         "SIGNUP_SUCCESS": "Na podany e-mail wysłaliśmy mail aktywacyjny. Poprzez przesłany link potwierdź założenie konta."
     },
+    "ACCOUNT_ACTIVATION":{
+        "SUCCESS": "Twoje konto zostało aktywowane"
+    },
     "MY_INFORMATION":{
         "NAME_ALERT":"Wprowadź nazwę wiadomości!",
         "NAME_PLACEHOLDER":"Wpisz nazwę wiadomości",
