@@ -1,0 +1,58 @@
+{
+    "GENERAL":{
+        "LEGAL": "Legal",
+        "PRIVACY": "Privacy",
+        "I_HAVE_READ_THE":"I have read the",
+        "AGREEMENT":"agreement",
+        "ERROR": "Error",
+        "SUCCESS": "Success",
+        "ERROR_DEFAULT": "Error occur"
+    },
+    "QUICK_VIEW":{
+        "TITLE":"User profile",
+        "LOGOUT":"Logout"
+    },
+    "FOOTER":{
+        "COPYRIGHT_TITLE": "Copyright © 2020 Pick Up My Data Sp. Z.O.O.. All rights reserved.",
+        "TERM_AND_CONDITIONS":"Term Conditions",
+        "PRIVACY_POLICY":"Privacy policy"
+    },
+    "HEADER":{
+        "MY_INFORMATION_ADD_BTN": "Add information"
+    },
+    "SIDE_MENU": {
+        "MY_INFORMATION" : "My Information"
+    },
+    "AUTHENTICATION":{
+        "USERNAME":"Username",
+        "USERNAME_ALERT":"Please input your username!",
+        "USERNAME_PLACEHOLDER": "Username",
+        "PASSWORD": "Password",
+        "PASSWORD_ALERT":"Please input your Password!",
+        "FORGET_PASSWORD":"Forget Password?",
+        "CONFIRM_PASSWORD":"Confirm Password",
+        "DONT_HAVE_ACCOUNT": "Don't have an account?",
+        "SIGN_UP": "Signup",
+        "SIGN_IN": "Sign In",
+        "EMAIL": "Email",
+        "EMAIL_ALERT": "The input is not valid E-mail!",
+        "LOGIN_404": "User with provided e-mail address, don't exist.",
+        "LOGIN_422": "Wrong password",
+        "SIGNUP_400": "Passwords must have at least one non alphanumeric character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').",
+        "SIGNUP_409": "User with this email already exists"
+        
+    },
+    "MY_INFORMATION":{
+        "NAME_ALERT":"Please input information message name!",
+        "NAME_PLACEHOLDER":"Input message name",
+        "EMAIL_ALERT":"E-mail addres is not valid",
+        "EMAIL_PLACEHOLDER":"Input e-mail addres of receiver",
+        "SEND_DATETIME_PLACEHOLDER": "Choose send date and time",
+        "SEND_DATETIME_TOOLTIP": "Choose date and time when your message schould be send to receiver (till that moment you can always turn off message)",
+        "INFORMATION_ALERT":"Please input information which you want to secure!",
+        "INFORMATION_PLACEHOLDER":"Please input information, which you want to send",
+        "SUBMIT_BTN":"Secure it",
+        "TURN_OFF_BTN": "Turn off"
+
+    }
+}

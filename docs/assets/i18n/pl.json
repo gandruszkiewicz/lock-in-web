@@ -1,0 +1,57 @@
+{
+    "GENERAL":{
+        "LEGAL": "Regulamin",
+        "PRIVACY": "Polityka prywatności",
+        "I_HAVE_READ_THE":"Zapoznałem się z",
+        "AGREEMENT":"regulaminem",
+        "ERROR": "Błąd",
+        "SUCCESS": "Sukces",
+        "ERROR_DEFAULT": "Wystąpił błąd"
+    },
+    "QUICK_VIEW":{
+        "TITLE":"Profil użytkownika",
+        "LOGOUT":"Wyloguj się"
+    },
+    "FOOTER":{
+        "COPYRIGHT_TITLE": "Własność Pick Up My Data Sp. Z.O.O Wszelkie prawa zastrzeżone.",
+        "TERM_AND_CONDITIONS":"Zasady i warunki",
+        "PRIVACY_POLICY":"Polityka prywatności"
+    },
+    "HEADER":{
+        "MY_INFORMATION_ADD_BTN": "Dodaj informację"
+    },
+    "SIDE_MENU": {
+        "MY_INFORMATION" : "Moje informacje"
+    },
+    "AUTHENTICATION":{
+        "USERNAME":"Nazwa użytkownika",
+        "USERNAME_ALERT":"Wprowadź nazwę użytkownika",
+        "USERNAME_PLACEHOLDER": "Nazwa użytkownika",
+        "PASSWORD": "Hasło",
+        "PASSWORD_ALERT":"Wprowadź hasło",
+        "FORGET_PASSWORD":"Zapomniałeś hasła?",
+        "CONFIRM_PASSWORD":"Potwierdź hasło",
+        "DONT_HAVE_ACCOUNT": "Nie posiadasz konta?",
+        "SIGN_UP": "Załóż konto",
+        "SIGN_IN":"Zaloguj się",
+        "EMAIL":"Adres e-mail",
+        "EMAIL_ALERT":"Podany adres e-mail jest nieprawidłowy",
+        "LOGIN_404": "Użytkownik, o podanym adresie e-mail, nie istnieje",
+        "LOGIN_422": "Niepoprawne hasło",
+        "SIGNUP_400": "Hasło musi mieć przynajmniej jeden znak specjalny np '?' czy '!'. Hasło usi mieć przynajmniej jedną cyfrę ('0'-'9'). Hasło usi mieć przynajmniej jedną dużą literę.",
+        "SIGNUP_409": "Użytkownik z podanym adresem e-mail już istnieje"
+    },
+    "MY_INFORMATION":{
+        "NAME_ALERT":"Wprowadź nazwę wiadomości!",
+        "NAME_PLACEHOLDER":"Wpisz nazwę wiadomości",
+        "EMAIL_ALERT":"Niepoprawny adres e-mail",
+        "EMAIL_PLACEHOLDER":"Podaj adres e-mail, odbiorcy wiadomości",
+        "SEND_DATETIME_PLACEHOLDER": "Wybierz datę i godzinę wysłania wiadomości",
+        "SEND_DATETIME_TOOLTIP": "Wybierz datę i godzinę, kiedy wiadomość może zostać wysłana (do tego momentu możesz zawsze wyłączyć wiadomość).",
+        "INFORMATION_ALERT":"Wprowadź informacje, które chcesz zabezpieczyć",
+        "INFORMATION_PLACEHOLDER":"Podaj informacje, które chcesz przekazać osobie",
+        "SUBMIT_BTN":"Zabezpiecz",
+        "TURN_OFF_BTN": "Wyłącz"
+
+    }
+}
