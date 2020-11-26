@@ -1,6 +1,6 @@
 {
     "/api/v1": {
-      "target": "http://lockin-dev.us-west-2.elasticbeanstalk.com",
+      "target": "https://datazen.tk",
       "secure": false,
       "changeOrigin": true
     }
